@@ -1,5 +1,6 @@
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { ContactForm } from "@/components/site/ContactForm";
 import {
   carePlans,
   detailedServices,
@@ -468,126 +469,9 @@ function ContactSection() {
             clearest next move.
           </p>
         </div>
-        <form className="rounded-lg border border-white/10 bg-[#101011] p-5 shadow-2xl shadow-black/30 sm:p-7">
-          {/* TODO: Wire this form to Resend or another email service. */}
-          <div className="grid gap-5 md:grid-cols-2">
-            <Field label="Name" name="name" placeholder="Your name" />
-            <Field label="Email" name="email" placeholder="you@business.com" type="email" />
-            <Field label="Business name" name="business" placeholder="Business name" />
-            <Field label="Existing website URL" name="website" placeholder="https://" type="url" />
-            <SelectField
-              label="Service interested in"
-              name="service"
-              options={[
-                "Website Refresh",
-                "New Business Website",
-                "Advanced Web Platform",
-                "Logo and Brand Refresh",
-                "SEO Setup",
-                "Monthly Care Plan",
-              ]}
-            />
-            <SelectField
-              label="Budget range"
-              name="budget"
-              options={[
-                "$750 - $2,500",
-                "$2,500 - $5,000",
-                "$5,000 - $10,000",
-                "$10,000+",
-                "Not sure yet",
-              ]}
-            />
-            <SelectField
-              label="Timeline"
-              name="timeline"
-              options={[
-                "As soon as possible",
-                "Within 1 month",
-                "1 - 3 months",
-                "Flexible",
-              ]}
-            />
-            <div className="md:col-span-2">
-              <label htmlFor="message" className="text-sm font-medium text-[#F5F5F2]">
-                Project goals / message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={6}
-                placeholder="What needs to change, what is working now, and what would make the project successful?"
-                className="mt-2 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 py-3 text-sm text-[#F5F5F2] outline-none transition placeholder:text-[#73737A] focus:border-[#E6B8A2]/55"
-              />
-            </div>
-          </div>
-          <button
-            type="button"
-            className="mt-6 w-full rounded-full bg-[#E6B8A2] px-6 py-4 text-sm font-semibold text-[#0B0B0C] transition hover:-translate-y-0.5 hover:bg-[#F1C8B8] sm:w-auto"
-          >
-            Start a Project
-          </button>
-        </form>
+        <ContactForm />
       </div>
     </section>
-  );
-}
-
-function Field({
-  label,
-  name,
-  placeholder,
-  type = "text",
-}: {
-  label: string;
-  name: string;
-  placeholder: string;
-  type?: string;
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="text-sm font-medium text-[#F5F5F2]">
-        {label}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        className="mt-2 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 py-3 text-sm text-[#F5F5F2] outline-none transition placeholder:text-[#73737A] focus:border-[#E6B8A2]/55"
-      />
-    </div>
-  );
-}
-
-function SelectField({
-  label,
-  name,
-  options,
-}: {
-  label: string;
-  name: string;
-  options: string[];
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="text-sm font-medium text-[#F5F5F2]">
-        {label}
-      </label>
-      <select
-        id={name}
-        name={name}
-        defaultValue=""
-        className="mt-2 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 py-3 text-sm text-[#F5F5F2] outline-none transition focus:border-[#E6B8A2]/55"
-      >
-        <option value="" disabled>
-          Select an option
-        </option>
-        {options.map((option) => (
-          <option key={option}>{option}</option>
-        ))}
-      </select>
-    </div>
   );
 }
 
