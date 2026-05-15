@@ -9,10 +9,9 @@ import {
   processSteps,
   projectTiers,
   reasons,
-  resumeHighlights,
   servicePreviews,
-  technicalSkills,
   trustPoints,
+  whatGoesIntoTheWork,
 } from "@/lib/site-content";
 
 export default function Home() {
@@ -372,23 +371,23 @@ function AboutSection() {
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="rounded-lg border border-white/10 bg-[#101011] p-6">
-          <div className="relative aspect-square overflow-hidden rounded-lg border border-[#E6B8A2]/20 bg-[#0B0B0C]">
+          <div className="relative aspect-[2/3] overflow-hidden rounded-lg border border-[#E6B8A2]/20 bg-[#0B0B0C]">
             <Image
-              src="/founder-photo.png"
+              src="/about-photo.png"
               alt="Trey, the founder of Treydmark Tech"
               fill
               sizes="(min-width: 1024px) 34vw, 100vw"
-              className="object-cover"
-              priority={false}
+              className="object-contain"
+              loading="eager"
             />
           </div>
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <h3 className="text-2xl font-semibold text-[#F5F5F2]">
-            I'm Trey, the founder of Treydmark Tech.
+            I&apos;m Trey, the founder of Treydmark Tech.
           </h3>
           <p className="mt-5 text-base leading-8 text-[#C9C9C3]">
-            I'm focused on building websites that feel polished, perform well,
+            Our focus is building websites that feel polished, perform well,
             and communicate clearly. My background in software engineering and
             product development allows me to approach projects from both the
             technical and visual side. Beyond design, I focus on usability,
@@ -404,10 +403,10 @@ function AboutSection() {
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <div>
               <h4 className="font-semibold text-[#F5F5F2]">
-                Resume highlights
+                What Goes Into the Work
               </h4>
               <ul className="mt-4 space-y-3">
-                {resumeHighlights.map((item) => (
+                {whatGoesIntoTheWork.map((item) => (
                   <li key={item} className="text-sm leading-6 text-[#BDBDB7]">
                     {item}
                   </li>
@@ -415,17 +414,37 @@ function AboutSection() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-[#F5F5F2]">Technical skills</h4>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {technicalSkills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-[#D9D9D3]"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+              <h4 className="font-semibold text-[#F5F5F2]">
+                Background &amp; Experience
+              </h4>
+              <a
+                href="/documents/HLB3_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Trey Bryant resume PDF"
+                className="group mt-4 block rounded-lg border border-white/10 bg-[#0F0F10] p-4 transition hover:border-[#E6B8A2]/35 hover:bg-white/[0.045]"
+              >
+                <div className="space-y-4">
+                  <div className="relative aspect-[1275/1651] overflow-hidden rounded-md border border-[#E6B8A2]/20 bg-[#151516] shadow-[0_14px_30px_rgba(0,0,0,0.25)]">
+                    <div className="absolute right-3 top-3 z-10 rounded-full border border-white/10 bg-[#0F0F10]/88 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#E6B8A2] backdrop-blur-sm">
+                      PDF
+                    </div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(230,184,162,0.08),transparent_38%)]" />
+                    <div className="absolute inset-[0.7rem] overflow-hidden rounded-[0.55rem] border border-black/10">
+                      <Image
+                        src="/documents/HLB3_Resume-thumb.png"
+                        alt="Preview of Trey Bryant resume"
+                        width={1275}
+                        height={1651}
+                        className="h-full w-full object-contain object-top"
+                      />
+                    </div>
+                  </div>
+                  <p className="text-sm font-medium text-[#E6B8A2] transition group-hover:text-[#F1C8B8]">
+                    View Resume →
+                  </p>
+                </div>
+              </a>
             </div>
           </div>
         </div>

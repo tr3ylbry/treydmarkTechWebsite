@@ -174,20 +174,11 @@ export const reasons = [
   "A long-term partner mindset without bloated agency overhead",
 ];
 
-export const resumeHighlights = [
-  "Frontend development with React, Next.js, and modern CSS",
-  "Responsive layouts, landing pages, and conversion-focused site structure",
-  "Brand system refinement, visual direction, and content organization",
-  "SEO basics, analytics readiness, accessibility, and performance hygiene",
-];
-
-export const technicalSkills = [
-  "Next.js",
-  "React",
-  "Tailwind CSS",
-  "SEO Setup",
-  "Brand Systems",
-  "Analytics",
-  "Responsive UI",
-  "Performance",
+export const whatGoesIntoTheWork = [
+  "Responsive, conversion-focused page structure",
+  "Frontend development built for performance and scalability",
+  "Clear messaging and improved user experience",
+  "Brand consistency and visual direction",
+  "SEO-conscious structure and analytics",
+  "Long-term maintainability and growth planning",
 ];
