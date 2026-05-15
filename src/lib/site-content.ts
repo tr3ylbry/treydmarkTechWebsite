@@ -171,7 +171,7 @@ export const reasons = [
   "Modern design taste with practical business judgment",
   "Technical development ability beyond basic brochure sites",
   "SEO and performance awareness built into the foundation",
-  "A long-term partner mindset without bloated agency overhead",
+  "A long-term partnership without bloated agency overhead",
 ];
 
 export const whatGoesIntoTheWork = [
