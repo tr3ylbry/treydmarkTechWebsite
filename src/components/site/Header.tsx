@@ -16,7 +16,7 @@ export function Header() {
               Treydmark Tech
             </span>
             <span className="mt-1 text-[11px] uppercase tracking-[0.18em] text-[#A1A1AA]">
-              Web / Brand / SEO
+              DESIGN • DEVELOPMENT • STRATEGY
             </span>
           </span>
         </a>

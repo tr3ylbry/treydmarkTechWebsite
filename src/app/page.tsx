@@ -1,6 +1,7 @@
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { ContactForm } from "@/components/site/ContactForm";
+import Image from "next/image";
 import {
   carePlans,
   detailedServices,
@@ -43,15 +44,15 @@ function HeroSection() {
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 sm:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:px-10 lg:pb-28">
         <div className="fade-up">
           <p className="mb-5 inline-flex rounded-full border border-[#E6B8A2]/25 bg-[#E6B8A2]/8 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[#E6B8A2]">
-            Boutique creative-tech studio
+            MODERN DIGITAL STRATEGY
           </p>
           <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] text-[#F5F5F2] sm:text-6xl lg:text-7xl">
-            Modern websites for businesses ready to grow.
+            Intentionally crafted websites for businesses ready to grow.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-[#C9C9C3] sm:text-xl">
-            Treydmark Tech helps small and medium-sized businesses modernize
-            outdated sites, strengthen their brand, improve SEO foundations,
-            and turn more visitors into qualified customer inquiries.
+            Treydmark Tech helps small and medium-sized businesses build sharper
+            websites, stronger branding, and a cleaner digital presence designed
+            to turn visitors into real inquiries.
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <a
@@ -159,7 +160,7 @@ function ServicesPreview() {
       id="services"
       eyebrow="Services"
       title="The right web foundation for where your business is now."
-      copy="Whether the next move is a sharper redesign, a new website, or a more capable platform, the work is structured around credibility, clarity, and measurable business use."
+      copy="Whether the next step is a sharper redesign, a new website, or a more tailored platform, every build is structured around clarity, usability, and long-term business value."
     >
       <div className="grid gap-5 lg:grid-cols-3">
         {servicePreviews.map((service) => (
@@ -199,9 +200,9 @@ function PortfolioPreview() {
   return (
     <Section
       id="work"
-      eyebrow="Portfolio structure"
-      title="Visual project slots ready for real case studies."
-      copy="These placeholders are built like client work, with space for problem, solution, services, tech, and outcomes as completed projects are added."
+      eyebrow="Recent Work"
+      title="Thoughtfully crafted websites for brands, creatives, and growing businesses."
+      copy="A curated collection of completed work focused on thoughtful design, intuitive user experience, and real business impact."
     >
       <div className="grid gap-5 md:grid-cols-2">
         {portfolioProjects.map((project, index) => (
@@ -271,8 +272,8 @@ function ProcessSection() {
     <Section
       id="process"
       eyebrow="Process"
-      title="A clear path from unclear site to confident launch."
-      copy="The process keeps decisions visible and practical, so the website does not drift away from business goals."
+      title="A clear path from concept and planning to confident launch."
+      copy="The process keeps decisions clear, practical, and collaborative so the final site stays aligned with the goals of the business and the people behind it."
     >
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {processSteps.map((item) => (
@@ -298,9 +299,9 @@ function PricingSection() {
   return (
     <Section
       id="pricing"
-      eyebrow="Pricing preview"
+      eyebrow="Project Investment"
       title="Starting points, not one-size-fits-all packages."
-      copy="Final pricing depends on scope, timeline, content needs, integrations, and functionality. The goal is to price the work around the real business problem instead of forcing every project into the same box."
+      copy="Final cost depends on scope, timeline, content needs, integrations, and functionality. Pricing is shaped around the actual needs of the business instead of forcing every project into the same box."
     >
       <div className="grid gap-5 lg:grid-cols-3">
         {projectTiers.map((tier) => (
@@ -322,7 +323,7 @@ function PricingSection() {
       </div>
       <div className="mt-8 rounded-lg border border-[#E6B8A2]/20 bg-[#E6B8A2]/8 p-6">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#E6B8A2]">
-          Monthly care plans
+          Ongoing Support
         </p>
         <div className="mt-5 grid gap-5 md:grid-cols-3">
           {carePlans.map((plan) => (
@@ -343,7 +344,7 @@ function ServicesDetail() {
   return (
     <Section
       id="service-detail"
-      eyebrow="Service depth"
+      eyebrow="Beyond the Website"
       title="More than a new coat of paint."
       copy="Treydmark Tech can handle the public-facing brand layer and the technical systems behind it, so the site can grow with the business."
     >
@@ -366,30 +367,39 @@ function AboutSection() {
     <Section
       id="about"
       eyebrow="About"
-      title="A technical builder with design taste and business context."
+      title="Technical depth paired with thoughtful design."
       copy="This placeholder bio is structured for Trey, founder of Treydmark Tech, and can be tightened once the final resume details, background, and client story are ready."
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="rounded-lg border border-white/10 bg-[#101011] p-6">
-          <div className="grid aspect-square place-items-center rounded-lg border border-[#E6B8A2]/20 bg-[radial-gradient(circle_at_center,rgba(230,184,162,0.18),transparent_55%),#0B0B0C]">
-            <div className="text-center">
-              <p className="text-7xl font-semibold text-[#F5F5F2]">T</p>
-              <p className="mt-3 text-sm uppercase tracking-[0.18em] text-[#A1A1AA]">
-                Founder / Builder
-              </p>
-            </div>
+          <div className="relative aspect-square overflow-hidden rounded-lg border border-[#E6B8A2]/20 bg-[#0B0B0C]">
+            <Image
+              src="/founder-photo.png"
+              alt="Trey, the founder of Treydmark Tech"
+              fill
+              sizes="(min-width: 1024px) 34vw, 100vw"
+              className="object-cover"
+              priority={false}
+            />
           </div>
         </div>
         <div className="rounded-lg border border-white/10 bg-white/[0.03] p-6 sm:p-8">
           <h3 className="text-2xl font-semibold text-[#F5F5F2]">
-            I am Trey, founder of Treydmark Tech.
+            I'm Trey, the founder of Treydmark Tech.
           </h3>
           <p className="mt-5 text-base leading-8 text-[#C9C9C3]">
-            I combine software development, design sense, and practical business
-            strategy to help companies build websites that look better, perform
-            better, and communicate more clearly. The goal is not just a nicer
-            homepage. It is a stronger digital foundation that makes the
-            business easier to trust, understand, and contact.
+            I'm focused on building websites that feel polished, perform well,
+            and communicate clearly. My background in software engineering and
+            product development allows me to approach projects from both the
+            technical and visual side. Beyond design, I focus on usability,
+            performance, responsive layouts, SEO foundations, and the systems
+            underneath the site that support long-term growth.
+            <br /><br />
+            I’ve worked across enterprise and product-focused environments
+            building scalable systems, APIs, frontend applications, and
+            user-facing tools. That experience now carries into client work
+            focused on helping businesses, brands, and creatives present
+            themselves more clearly online.
           </p>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <div>

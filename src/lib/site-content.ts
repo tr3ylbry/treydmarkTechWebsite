@@ -8,63 +8,63 @@ export const navItems = [
 ];
 
 export const trustPoints = [
-  "Modern, responsive websites",
-  "SEO-ready foundations",
-  "Brand and logo refinement",
-  "Ongoing care and support",
+  "Custom Websites Built To Scale",
+  "SEO-Ready Foundations",
+  "Brand Identity & Visual Refinement",
+  "Long-Term Site Optimization & Support",
 ];
 
 export const servicePreviews = [
   {
-    title: "Website Refresh",
+    title: "Website Redesign",
     audience: "For established businesses with outdated sites.",
     description:
-      "A modern redesign focused on clearer messaging, stronger mobile layouts, faster pages, and cleaner SEO basics.",
+      "A complete site overhaul focused on clearer messaging, stronger mobile layouts, faster pages, and cleaner SEO basics.",
     features: [
-      "Visual redesign",
-      "Mobile layout cleanup",
-      "Messaging refinement",
-      "Speed and SEO review",
+      "Updated Visual Identity",
+      "Mobile Layout Cleanup",
+      "Messaging Refinement",
+      "Performance & SEO Review",
     ],
   },
   {
     title: "New Business Website",
     audience: "For businesses that need a polished site from scratch.",
     description:
-      "A complete digital foundation with core pages, inquiry paths, service or product sections, analytics, and launch support.",
+      "A complete business website with custom pages, client inquiry forms, service or product sections, launch support, and a foundation built for long-term growth.",
     features: [
-      "Custom page structure",
-      "Inquiry form UI",
-      "Photo and service sections",
-      "Analytics-ready setup",
+      "Custom Page Layouts",
+      "Lead Capture & Inquiry Forms",
+      "Product & Service Showcase Sections",
+      "Launch Support, Domain & Email Setup",
     ],
   },
   {
-    title: "Advanced Web Platform",
+    title: "Refined Web Platform",
     audience: "For deeper functionality and custom workflows.",
     description:
-      "A more capable web build for businesses that need ecommerce, booking, dashboards, logins, databases, or internal tools.",
+      "A custom platform built for businesses that need ecommerce, booking systems, dashboards, user accounts, databases, or internal tools.",
     features: [
-      "User accounts",
-      "Booking or ecommerce",
-      "Dashboards",
-      "Database-backed workflows",
+      "User Authentication & Accounts",
+      "Booking & E-Commerce",
+      "Management Dashboards",
+      "Connected Web & Mobile Applications",
     ],
   },
 ];
 
 export const portfolioProjects = [
   {
-    title: "Artist/Musician Website",
-    type: "Creative website",
+    title: "JW XPERIENCE",
+    type: "Artist Website • New Build",
     summary:
-      "A performance-focused site concept with media sections, tour-ready calls to action, and a cleaner path from discovery to booking.",
-    tags: ["Next.js", "Branding", "Responsive Design"],
-    tone: "Performance, media, booking",
+      "A polished artist website built to showcase music, visuals, performance energy, and booking flows with an immersive creative presence.",
+    tags: ["Musical & Visual Showcase", "Artist Branding", "Content Driven"],
+    tone: "Media • Identity • Booking",
   },
   {
     title: "Local Service Business Redesign",
-    type: "Website refresh",
+    type: "Website Redesign",
     summary:
       "An outdated local business site reframed around trust, clear services, stronger mobile flow, and lead capture.",
     tags: ["SEO", "Copy Structure", "Mobile UX"],
@@ -93,74 +93,77 @@ export const processSteps = [
     step: "01",
     title: "Discover",
     description:
-      "Understand business goals, audience, current site issues, competitors, and the actions visitors should take.",
+      "Clarify goals, audience, messaging, and the overall experience the site should create.",
   },
   {
     step: "02",
     title: "Design",
     description:
-      "Shape the visual direction, page structure, messaging hierarchy, and conversion paths before development starts.",
+      "Shape the visual direction, page structure, messaging flow, and inquiry experience before development begins.",
   },
   {
     step: "03",
     title: "Build",
     description:
-      "Develop responsive, fast, SEO-conscious pages with clean structure and room for future growth.",
+      "Develop responsive, polished, search-friendly pages with clean structure and room for future growth.",
   },
   {
     step: "04",
     title: "Launch & Support",
     description:
-      "Deploy, monitor, polish the final details, and optionally keep improving the site after launch.",
+      "Deploy the site, refine final details, and provide ongoing support as the business grows.",
   },
 ];
 
 export const projectTiers = [
   {
-    name: "Website Refresh",
+    name: "Website Redesign",
     price: "Starting at $750",
     description:
-      "Best for businesses that already have a site but need it to look sharper, load better, and communicate more clearly.",
+      "Best for businesses that already have a site, but need better organization, faster loading, and clearer communication.",
   },
   {
     name: "New Business Website",
     price: "Starting at $2,500",
     description:
-      "Best for new or growing businesses that need a complete, professional web presence built from the ground up.",
+      "Best for new or growing businesses that need a complete, professional website built from the ground up.",
   },
   {
-    name: "Advanced Website / Platform",
+    name: "Integrated Web Platform",
     price: "Custom quote",
     description:
-      "Best for custom functionality, ecommerce, dashboards, bookings, databases, or multi-step workflows.",
+      "Best for businesses that need e-commerce, dashboards, booking systems, internal tools, or connected web and mobile experiences.",
   },
 ];
 
 export const carePlans = [
   {
-    name: "Essential Care",
+    name: "Essential Support",
     description:
       "Hosting oversight, backups, uptime checks, security awareness, and small site updates.",
   },
   {
-    name: "Growth Plan",
+    name: "Growth Support",
     description:
       "SEO monitoring, analytics review, content updates, and ongoing improvement recommendations.",
   },
   {
-    name: "Full Digital Management",
+    name: "Strategic Partnership",
     description:
       "Ongoing development, SEO and content strategy, priority support, and deeper site evolution.",
   },
 ];
 
 export const detailedServices = [
-  "Website Refresh",
-  "New Website Creation",
-  "Advanced Website / Platform",
-  "Logo and Brand Refresh",
-  "SEO Setup",
-  "Monthly Maintenance / Growth Plans",
+  "Lead Generation Systems",
+  "Booking & Scheduling",
+  "Artist / Media Portfolios",
+  "E-Commerce Experiences",
+  "Membership & Account Systems",
+  "Analytics & Search Visibility",
+  "Ongoing Growth Support",
+  "Multi-Platform Brand Presence",
+  "Client Portals & Dashboards",
 ];
 
 export const reasons = [

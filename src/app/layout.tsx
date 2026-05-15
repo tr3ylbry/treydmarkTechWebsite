@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Treydmark Tech | Modern Websites, Branding & SEO",
   description:
-    "Treydmark Tech helps small and medium-sized businesses modernize their websites, strengthen their brand, improve SEO, and generate more customer inquiries.",
+    "Treydmark Tech helps small and medium-sized businesses build sharper websites, a stronger brand, and a clean digital foundation that will turn visitors into customers.",
   metadataBase: new URL("https://treydmarktech.com"),
   openGraph: {
     title: "Treydmark Tech | Modern Websites, Branding & SEO",
