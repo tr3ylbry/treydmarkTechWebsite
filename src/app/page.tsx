@@ -370,7 +370,7 @@ function AboutSection() {
       copy="This placeholder bio is structured for Trey, founder of Treydmark Tech, and can be tightened once the final resume details, background, and client story are ready."
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-lg border border-white/10 bg-[#101011] p-6">
+        <div className="self-start rounded-lg border border-white/10 bg-[#101011] p-6">
           <div className="relative aspect-[2/3] overflow-hidden rounded-lg border border-[#E6B8A2]/20 bg-[#0B0B0C]">
             <Image
               src="/about-photo.png"

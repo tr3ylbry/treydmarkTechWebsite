@@ -130,7 +130,7 @@ export const projectTiers = [
   },
   {
     name: "Integrated Web Platform",
-    price: "Custom quote",
+    price: "Custom Quote",
     description:
       "Best for businesses that need e-commerce, dashboards, booking systems, internal tools, or connected web and mobile experiences.",
   },
@@ -161,9 +161,9 @@ export const detailedServices = [
   "E-Commerce Experiences",
   "Membership & Account Systems",
   "Analytics & Search Visibility",
-  "Ongoing Growth Support",
-  "Multi-Platform Brand Presence",
   "Client Portals & Dashboards",
+  "Multi-Platform Brand Presence",
+  "Ongoing Growth Support",
 ];
 
 export const reasons = [
