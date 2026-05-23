@@ -1,9 +1,9 @@
 export const navItems = [
-  { label: "Services", href: "#services" },
   { label: "Work", href: "#work" },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
   { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -16,39 +16,63 @@ export const trustPoints = [
 
 export const servicePreviews = [
   {
-    title: "Website Redesign",
-    audience: "For established businesses with outdated sites.",
+    title: "Business Websites",
     description:
-      "A complete site overhaul focused on clearer messaging, stronger mobile layouts, faster pages, and cleaner SEO basics.",
+      "Professional websites designed to communicate clearly, perform well, and support long-term business growth.",
     features: [
-      "Updated Visual Identity",
-      "Mobile Layout Cleanup",
+      "Responsive Page Systems",
+      "Conversion-Focused Structure",
+      "SEO-Conscious Foundations",
+    ],
+  },
+  {
+    title: "Booking & Lead Capture",
+    description:
+      "Inquiry flows, scheduling systems, contact funnels, and streamlined client communication.",
+    features: [
+      "Multi-Step Inquiry Forms",
+      "Scheduling Integrations",
+      "Lead Routing & Follow-Up",
+    ],
+  },
+  {
+    title: "E-Commerce & Memberships",
+    description:
+      "Online stores, gated content, subscription systems, and account-based experiences.",
+    features: [
+      "Product & Checkout Flows",
+      "Membership Systems",
+      "User Account Experiences",
+    ],
+  },
+  {
+    title: "Brand & Visual Direction",
+    description:
+      "Refined visual systems that improve clarity, trust, and overall digital presentation.",
+    features: [
       "Messaging Refinement",
-      "Performance & SEO Review",
+      "Visual Consistency",
+      "Content Structure",
     ],
   },
   {
-    title: "New Business Website",
-    audience: "For businesses that need a polished site from scratch.",
+    title: "SEO & Search Visibility",
     description:
-      "A complete business website with custom pages, client inquiry forms, service or product sections, launch support, and a foundation built for long-term growth.",
+      "Technical foundations that help websites perform better and remain discoverable.",
     features: [
-      "Custom Page Layouts",
-      "Lead Capture & Inquiry Forms",
-      "Product & Service Showcase Sections",
-      "Launch Support, Domain & Email Setup",
+      "Metadata & Indexing",
+      "Analytics Readiness",
+      "Performance Optimization",
     ],
   },
   {
-    title: "Refined Web Platform",
-    audience: "For deeper functionality and custom workflows.",
+    title: "Platforms & Internal Tools",
     description:
-      "A custom platform built for businesses that need ecommerce, booking systems, dashboards, user accounts, databases, or internal tools.",
+      "Connected systems, dashboards, and operational tools built around real workflows.",
     features: [
-      "User Authentication & Accounts",
-      "Booking & E-Commerce",
-      "Management Dashboards",
-      "Connected Web & Mobile Applications",
+      "Admin Dashboards",
+      "Database-Backed Systems",
+      "Connected Web Applications",
     ],
   },
 ];
@@ -233,7 +257,7 @@ export const growthPlans = [
     ],
   },
   {
-    name: "Active Growth / Partner Plan",
+    name: "Partner Plan",
     startingAt: "Starting at $1,000/mo",
     bestFor:
       "Serious businesses that need a fractional digital/software partner for ongoing iteration and new functionality.",

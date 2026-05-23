@@ -9,9 +9,7 @@ import {
   detailedServices,
   portfolioProjects,
   processSteps,
-  reasons,
   servicePreviews,
-  trustPoints,
   whatGoesIntoTheWork,
 } from "@/lib/site-content";
 
@@ -21,14 +19,12 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
-        <TrustStrip />
-        <ServicesPreview />
         <PortfolioPreview />
+        <AboutSection />
+        <ServicesPreview />
+        <ServicesDetail />
         <ProcessSection />
         <PricingSection />
-        <ServicesDetail />
-        <AboutSection />
-        <WhySection />
         <ContactSection />
       </main>
       <Footer />
@@ -139,56 +135,40 @@ function HeroVisual() {
   );
 }
 
-function TrustStrip() {
-  return (
-    <section aria-label="Treydmark Tech value points" className="border-y border-white/10 bg-white/[0.025]">
-      <div className="mx-auto grid max-w-7xl gap-px px-5 py-4 sm:px-8 md:grid-cols-2 lg:grid-cols-4 lg:px-10">
-        {trustPoints.map((point) => (
-          <div key={point} className="flex items-center gap-3 py-4">
-            <span className="size-2 rounded-full bg-[#E6B8A2]" />
-            <p className="text-sm font-medium text-[#E6E6E1]">{point}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function ServicesPreview() {
   return (
     <Section
       id="services"
       eyebrow="Services"
-      title="The right web foundation for where your business is now."
-      copy="Whether the next step is a sharper redesign, a new website, or a more tailored platform, every build is structured around clarity, usability, and long-term business value."
+      title="Practical web systems built for real business needs."
+      copy="From business websites to booking flows, ecommerce, and internal tools, the work is shaped into clean systems that are easy to use and built to grow."
     >
-      <div className="grid gap-5 lg:grid-cols-3">
-        {servicePreviews.map((service) => (
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {servicePreviews.map((service, index) => (
           <article
             key={service.title}
-            className="group rounded-lg border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-[#E6B8A2]/35 hover:bg-white/[0.055]"
+            className="group flex h-full flex-col rounded-lg border border-white/10 bg-white/[0.03] p-5 transition hover:-translate-y-1 hover:border-[#E6B8A2]/35 hover:bg-white/[0.05] sm:p-6"
           >
-            <p className="text-sm text-[#E6B8A2]">{service.audience}</p>
-            <h3 className="mt-4 text-2xl font-semibold text-[#F5F5F2]">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#A1A1AA]">
+                {String(index + 1).padStart(2, "0")}
+              </p>
+              <span className="h-px w-10 bg-[#E6B8A2]/45 transition group-hover:w-14 group-hover:bg-[#E6B8A2]" />
+            </div>
+            <h3 className="text-xl font-semibold text-[#F5F5F2]">
               {service.title}
             </h3>
-            <p className="mt-4 min-h-24 text-sm leading-6 text-[#BDBDB7]">
+            <p className="mt-3 text-sm leading-6 text-[#BDBDB7]">
               {service.description}
             </p>
-            <ul className="mt-6 space-y-3">
+            <ul className="mt-5 grid gap-2.5 border-t border-white/10 pt-5">
               {service.features.map((feature) => (
-                <li key={feature} className="flex gap-3 text-sm text-[#D7D7D1]">
-                  <span className="mt-2 h-px w-4 bg-[#E6B8A2]" />
-                  {feature}
+                <li key={feature} className="flex gap-3 text-sm leading-6 text-[#D7D7D1]">
+                  <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-[#E6B8A2]" />
+                  <span>{feature}</span>
                 </li>
               ))}
             </ul>
-            <a
-              href="#contact"
-              className="mt-7 inline-flex text-sm font-semibold text-[#F5F5F2] transition group-hover:text-[#E6B8A2]"
-            >
-              Discuss this service
-            </a>
           </article>
         ))}
       </div>
@@ -200,7 +180,7 @@ function PortfolioPreview() {
   return (
     <Section
       id="work"
-      eyebrow="Recent Work"
+      eyebrow="Selected Work"
       title="Thoughtfully crafted websites for brands, creatives, and growing businesses."
       copy="A curated collection of completed work focused on thoughtful design, intuitive user experience, and real business impact."
     >
@@ -379,7 +359,7 @@ function PricingSection() {
       id="pricing"
       eyebrow="Project Investment"
       title="Custom websites, redesigns, and growth partnerships."
-      copy="Treydmark Tech builds modern React and Next.js websites, migrations, and web platforms for businesses that need more than a generic drag-and-drop template. Every project is scoped around the business goal, technical needs, and long-term direction."
+      copy="Treydmark Tech builds modern web solutions, migrations, and web platforms for businesses that need more than a generic drag-and-drop template. Every project is scoped around business goals, technical needs, and long-term direction."
     >
       <div className="rounded-lg border border-[#E6B8A2]/20 bg-[#E6B8A2]/8 p-5 sm:p-6">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#E6B8A2]">
@@ -492,9 +472,9 @@ function ServicesDetail() {
   return (
     <Section
       id="service-detail"
-      eyebrow="Beyond the Website"
-      title="More than a new coat of paint."
-      copy="Treydmark Tech can handle the public-facing brand layer and the technical systems behind it, so the site can grow with the business."
+      eyebrow="Service Depth"
+      title="Capabilities that support the full digital foundation."
+      copy="A stronger site often needs more than pages. These are the systems and support layers Treydmark Tech can connect around the core build."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {detailedServices.map((service) => (
@@ -515,8 +495,8 @@ function AboutSection() {
     <Section
       id="about"
       eyebrow="About"
-      title="Technical depth paired with thoughtful design."
-      copy="Treydmark Tech combines exceptional engineering, thoughtful design, and practical business strategy to build websites that perform as well as they look."
+      title="Founder-led work with product-level technical standards."
+      copy="Treydmark Tech is a high-quality web solution studio founded and led by Trey Bryant, combining software engineering, design judgment, and practical business strategy."
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="self-start rounded-lg border border-white/10 bg-[#101011] p-6">
@@ -556,8 +536,30 @@ function AboutSection() {
               </h4>
               <ul className="mt-4 space-y-3">
                 {whatGoesIntoTheWork.map((item) => (
-                  <li key={item} className="text-sm leading-6 text-[#BDBDB7]">
-                    {item}
+                  <li key={item} className="group flex items-start gap-3 text-sm leading-6 text-[#BDBDB7]">
+                    <span className="mt-1.5 inline-flex size-5 shrink-0 items-center justify-center text-[#E6B8A2] transition group-hover:rotate-45" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="size-5 drop-shadow-[0_0_8px_rgba(230,184,162,0.22)]"
+                        fill="none"
+                      >
+                        <g fill="currentColor">
+                          <circle cx="12" cy="4" r="1.45" />
+                          <circle cx="16" cy="5.07" r="1.45" />
+                          <circle cx="18.93" cy="8" r="1.45" />
+                          <circle cx="20" cy="12" r="1.45" />
+                          <circle cx="18.93" cy="16" r="1.45" />
+                          <circle cx="16" cy="18.93" r="1.45" />
+                          <circle cx="12" cy="20" r="1.45" />
+                          <circle cx="8" cy="18.93" r="1.45" />
+                          <circle cx="5.07" cy="16" r="1.45" />
+                          <circle cx="4" cy="12" r="1.45" />
+                          <circle cx="5.07" cy="8" r="1.45" />
+                          <circle cx="8" cy="5.07" r="1.45" />
+                        </g>
+                      </svg>
+                    </span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -571,15 +573,15 @@ function AboutSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Open Trey Bryant resume PDF"
-                className="group mt-4 block rounded-lg border border-white/10 bg-[#0F0F10] p-4 transition hover:border-[#E6B8A2]/35 hover:bg-white/[0.045]"
+                className="group mt-4 block rounded-lg border border-white/10 bg-[#0F0F10] p-3 shadow-[0_18px_55px_rgba(0,0,0,0.22)] transition hover:border-[#E6B8A2]/35 hover:bg-white/[0.045]"
               >
-                <div className="space-y-4">
-                  <div className="relative aspect-[1275/1651] overflow-hidden rounded-md border border-[#E6B8A2]/20 bg-[#151516] shadow-[0_14px_30px_rgba(0,0,0,0.25)]">
+                <div className="space-y-3">
+                  <div className="relative aspect-[1275/1651] overflow-hidden rounded-md border border-[#E6B8A2]/20 bg-[#151516] shadow-[0_22px_48px_rgba(0,0,0,0.38)] after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_center,transparent_58%,rgba(0,0,0,0.24))]">
                     <div className="absolute right-3 top-3 z-10 rounded-full border border-white/10 bg-[#0F0F10]/88 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#E6B8A2] backdrop-blur-sm">
                       PDF
                     </div>
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(230,184,162,0.08),transparent_38%)]" />
-                    <div className="absolute inset-[0.7rem] overflow-hidden rounded-[0.55rem] border border-black/10">
+                    <div className="absolute inset-[0.45rem] overflow-hidden rounded-[0.55rem] border border-black/10 shadow-[0_8px_22px_rgba(0,0,0,0.22)]">
                       <Image
                         src="/documents/HLB3_Resume-thumb.png"
                         alt="Preview of Trey Bryant resume"
@@ -602,38 +604,11 @@ function AboutSection() {
   );
 }
 
-function WhySection() {
-  return (
-    <section className="bg-[#F5F5F2] text-[#0B0B0C]">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:py-28">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#8A6555]">
-            Why Treydmark Tech
-          </p>
-          <h2 className="mt-4 text-4xl font-semibold leading-[1.08] sm:text-5xl">
-            A better online presence without agency drag.
-          </h2>
-        </div>
-        <div className="grid gap-4">
-          {reasons.map((reason) => (
-            <div
-              key={reason}
-              className="rounded-lg border border-[#0B0B0C]/10 bg-white p-5 shadow-sm"
-            >
-              <p className="text-base font-medium">{reason}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
       <div className="absolute right-0 top-0 -z-10 h-96 w-96 translate-x-1/3 rounded-full bg-[#E6B8A2]/10 blur-3xl" />
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.02fr_0.98fr]">
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="max-w-4xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E6B8A2]">
             Start a project
@@ -667,7 +642,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
+    <section id={id} className="px-5 py-20 sm:px-8 lg:px-10 lg:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E6B8A2]">
