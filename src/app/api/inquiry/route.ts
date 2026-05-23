@@ -4,6 +4,7 @@ import { getResend } from "@/lib/resend";
 type InquiryPayload = {
   name: string;
   email: string;
+  phone: string;
   business: string;
   website: string;
   service: string;
@@ -29,6 +30,7 @@ function getInquiryEmailHtml(payload: InquiryPayload) {
   const rows = [
     ["Name", payload.name],
     ["Email", payload.email],
+    ["Phone", formatOptionalValue(payload.phone)],
     ["Business", formatOptionalValue(payload.business)],
     ["Website", formatOptionalValue(payload.website)],
     ["Service", payload.service],
@@ -77,6 +79,7 @@ function getInquiryEmailText(payload: InquiryPayload) {
     "",
     `Name: ${payload.name}`,
     `Email: ${payload.email}`,
+    `Phone: ${formatOptionalValue(payload.phone)}`,
     `Business: ${formatOptionalValue(payload.business)}`,
     `Website: ${formatOptionalValue(payload.website)}`,
     `Service: ${payload.service}`,

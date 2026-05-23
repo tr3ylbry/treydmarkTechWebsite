@@ -3,11 +3,12 @@ import { Header } from "@/components/site/Header";
 import { ContactForm } from "@/components/site/ContactForm";
 import Image from "next/image";
 import {
-  carePlans,
+  growthPlans,
+  mainBuildTiers,
+  modernizationServices,
   detailedServices,
   portfolioProjects,
   processSteps,
-  projectTiers,
   reasons,
   servicePreviews,
   trustPoints,
@@ -203,40 +204,108 @@ function PortfolioPreview() {
       title="Thoughtfully crafted websites for brands, creatives, and growing businesses."
       copy="A curated collection of completed work focused on thoughtful design, intuitive user experience, and real business impact."
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2">
         {portfolioProjects.map((project, index) => (
           <article
             key={project.title}
             className="group overflow-hidden rounded-lg border border-white/10 bg-[#101011] transition hover:-translate-y-1 hover:border-[#E6B8A2]/35"
           >
-            <div className="relative h-64 overflow-hidden border-b border-white/10 bg-[#0B0B0C]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_22%,rgba(230,184,162,0.22),transparent_34%),linear-gradient(135deg,rgba(245,245,242,0.1),transparent_45%)]" />
-              <div className="absolute inset-x-6 top-6 flex items-center justify-between rounded-md border border-white/10 bg-[#111113]/88 p-3">
-                <span className="text-xs text-[#A1A1AA]">Before</span>
-                <span className="text-xs text-[#E6B8A2]">After</span>
-              </div>
-              <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-4">
-                <div className="rounded-md border border-white/10 bg-black/35 p-4">
-                  <div className="h-3 w-16 rounded-full bg-white/18" />
-                  <div className="mt-4 space-y-2">
-                    <div className="h-2 rounded-full bg-white/12" />
-                    <div className="h-2 w-2/3 rounded-full bg-white/10" />
-                    <div className="h-2 w-1/2 rounded-full bg-white/10" />
+            {project.href ? (
+              <div className="relative border-b border-white/10 bg-[#0B0B0C] p-5">
+                <div className="absolute inset-0 rounded-md bg-[radial-gradient(circle_at_22%_10%,rgba(230,184,162,0.18),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_28%)]" />
+                <div className="relative isolate overflow-hidden rounded-md border border-white/10 bg-[#09090A] shadow-[0_18px_45px_rgba(0,0,0,0.35)] before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-white/[0.03]">
+                  <div className="relative overflow-hidden rounded-t-[inherit] border-b border-white/10 bg-[linear-gradient(180deg,rgba(26,26,28,0.98),rgba(15,15,17,0.95))] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.035),inset_0_-1px_0_rgba(0,0,0,0.35)] backdrop-blur-sm">
+                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-1.5">
+                      <span className="size-1.5 rounded-full bg-[#5A302A] transition group-hover:bg-[#C96B5A]" />
+                      <span className="size-1.5 rounded-full bg-[#65512B] transition group-hover:bg-[#D6AE59]" />
+                      <span className="size-1.5 rounded-full bg-[#2B5735] transition group-hover:bg-[#55B46D]" />
+                    </div>
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full max-w-[340px] min-w-0 items-center gap-2 rounded-full border border-white/8 bg-[#0F1011] px-3 py-1.5 text-[11px] text-[#8E8E89] shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] transition hover:border-white/14 hover:text-[#CFCFC8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        viewBox="0 0 24 24"
+                        className="h-3.5 w-3.5 shrink-0 text-[#A27D6D]"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <rect x="5" y="11" width="14" height="9" rx="2" />
+                        <path d="M8 11V8a4 4 0 1 1 8 0v3" />
+                      </svg>
+                      <span className="truncate font-mono">jw-xperience.com</span>
+                    </a>
+                    <div className="flex-1" />
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 rounded-full border border-[#E6B8A2]/15 bg-[#E6B8A2]/8 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#D9B19E] transition hover:border-[#E6B8A2]/24 hover:bg-[#E6B8A2]/11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
+                    >
+                      Live Site
+                    </a>
+                    </div>
+                  </div>
+                  <div className="relative h-[336px] overflow-hidden border-t border-white/[0.03] bg-[#050506] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:h-[400px] lg:h-[500px]">
+                    <iframe
+                      src={project.href}
+                      title={`${project.title} website preview`}
+                      className="h-full w-full border-0 bg-white"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="relative overflow-hidden rounded-b-[inherit] flex items-center justify-between gap-3 border-t border-white/10 bg-[#0F0F10] px-4 py-3">
+                    <p className="text-xs leading-5 text-[#8F8F89]">
+                      If this preview does not load on your device, open the site in a new tab.
+                    </p>
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 text-xs font-medium text-[#E6B8A2] transition hover:text-[#F1C8B8]"
+                    >
+                      Open Site
+                    </a>
                   </div>
                 </div>
-                <div className="rounded-md border border-[#E6B8A2]/25 bg-[#E6B8A2]/10 p-4 shadow-[0_0_30px_rgba(230,184,162,0.1)]">
-                  <div className="h-3 w-20 rounded-full bg-[#E6B8A2]/80" />
-                  <div className="mt-4 space-y-2">
-                    <div className="h-2 rounded-full bg-white/45" />
-                    <div className="h-2 w-4/5 rounded-full bg-white/25" />
-                    <div className="h-2 w-3/5 rounded-full bg-white/18" />
+              </div>
+            ) : (
+              <div className="relative h-64 overflow-hidden border-b border-white/10 bg-[#0B0B0C]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_22%,rgba(230,184,162,0.22),transparent_34%),linear-gradient(135deg,rgba(245,245,242,0.1),transparent_45%)]" />
+                <div className="absolute inset-x-6 top-6 flex items-center justify-between rounded-md border border-white/10 bg-[#111113]/88 p-3">
+                  <span className="text-xs text-[#A1A1AA]">Before</span>
+                  <span className="text-xs text-[#E6B8A2]">After</span>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-4">
+                  <div className="rounded-md border border-white/10 bg-black/35 p-4">
+                    <div className="h-3 w-16 rounded-full bg-white/18" />
+                    <div className="mt-4 space-y-2">
+                      <div className="h-2 rounded-full bg-white/12" />
+                      <div className="h-2 w-2/3 rounded-full bg-white/10" />
+                      <div className="h-2 w-1/2 rounded-full bg-white/10" />
+                    </div>
+                  </div>
+                  <div className="rounded-md border border-[#E6B8A2]/25 bg-[#E6B8A2]/10 p-4 shadow-[0_0_30px_rgba(230,184,162,0.1)]">
+                    <div className="h-3 w-20 rounded-full bg-[#E6B8A2]/80" />
+                    <div className="mt-4 space-y-2">
+                      <div className="h-2 rounded-full bg-white/45" />
+                      <div className="h-2 w-4/5 rounded-full bg-white/25" />
+                      <div className="h-2 w-3/5 rounded-full bg-white/18" />
+                    </div>
                   </div>
                 </div>
+                <span className="absolute left-6 top-20 font-mono text-sm text-white/30">
+                  0{index + 1}
+                </span>
               </div>
-              <span className="absolute left-6 top-20 font-mono text-sm text-white/30">
-                0{index + 1}
-              </span>
-            </div>
+            )}
             <div className="p-6">
               <p className="text-sm text-[#E6B8A2]">{project.type}</p>
               <h3 className="mt-3 text-2xl font-semibold text-[#F5F5F2]">
@@ -258,6 +327,16 @@ function PortfolioPreview() {
                   </span>
                 ))}
               </div>
+              {project.href ? (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex text-sm font-semibold text-[#E6B8A2] transition hover:text-[#F1C8B8]"
+                >
+                  Visit Site
+                </a>
+              ) : null}
             </div>
           </article>
         ))}
@@ -299,43 +378,113 @@ function PricingSection() {
     <Section
       id="pricing"
       eyebrow="Project Investment"
-      title="Starting points, not one-size-fits-all packages."
-      copy="Final cost depends on scope, timeline, content needs, integrations, and functionality. Pricing is shaped around the actual needs of the business instead of forcing every project into the same box."
+      title="Custom websites, redesigns, and growth partnerships."
+      copy="Treydmark Tech builds modern React and Next.js websites, migrations, and web platforms for businesses that need more than a generic drag-and-drop template. Every project is scoped around the business goal, technical needs, and long-term direction."
     >
-      <div className="grid gap-5 lg:grid-cols-3">
-        {projectTiers.map((tier) => (
-          <article
-            key={tier.name}
-            className="rounded-lg border border-white/10 bg-[#101011] p-6"
-          >
-            <h3 className="text-xl font-semibold text-[#F5F5F2]">
-              {tier.name}
-            </h3>
-            <p className="mt-4 text-3xl font-semibold text-[#E6B8A2]">
-              {tier.price}
-            </p>
-            <p className="mt-4 text-sm leading-6 text-[#BDBDB7]">
-              {tier.description}
-            </p>
-          </article>
-        ))}
-      </div>
-      <div className="mt-8 rounded-lg border border-[#E6B8A2]/20 bg-[#E6B8A2]/8 p-6">
+      <div className="rounded-lg border border-[#E6B8A2]/20 bg-[#E6B8A2]/8 p-5 sm:p-6">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#E6B8A2]">
-          Ongoing Support
+          NOTE ON PRICING
         </p>
-        <div className="mt-5 grid gap-5 md:grid-cols-3">
-          {carePlans.map((plan) => (
-            <div key={plan.name}>
-              <h3 className="font-semibold text-[#F5F5F2]">{plan.name}</h3>
-              <p className="mt-2 text-sm leading-6 text-[#C9C9C3]">
-                {plan.description}
-              </p>
-            </div>
-          ))}
+        <p className="mt-3 text-sm leading-6 text-[#D8D8D2]">
+          Starting prices give a realistic entry point. Final investment depends on scope, timeline, integrations, content, and functionality. Larger or specialized builds are quoted custom.
+        </p>
+      </div>
+
+      <PricingGroup
+        eyebrow="Main Build Tiers"
+        title="Modern custom builds for serious presentation and scalable growth."
+        items={mainBuildTiers}
+        columns="three"
+      />
+
+      <PricingGroup
+        eyebrow="Redesign / Modernization"
+        title="Upgrade an existing site into a stronger long-term foundation."
+        items={modernizationServices}
+        columns="two"
+      />
+
+      <PricingGroup
+        eyebrow="Ongoing Care / Growth Plans"
+        title="Recurring support for infrastructure, optimization, and active iteration."
+        items={growthPlans}
+        columns="three"
+      />
+    </Section>
+  );
+}
+
+type PricingItem = {
+  name: string;
+  startingAt: string;
+  bestFor?: string;
+  goodFor?: string;
+  positioning: string;
+  features: string[];
+};
+
+function PricingGroup({
+  eyebrow,
+  title,
+  items,
+  columns,
+}: {
+  eyebrow: string;
+  title: string;
+  items: PricingItem[];
+  columns: "two" | "three";
+}) {
+  const gridClassName =
+    columns === "two" ? "grid gap-5 lg:grid-cols-2" : "grid gap-5 lg:grid-cols-3";
+
+  return (
+    <div className="mt-12">
+      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#E6B8A2]">
+            {eyebrow}
+          </p>
+          <h3 className="mt-2 max-w-5xl text-2xl font-semibold leading-tight text-[#F5F5F2]">
+            {title}
+          </h3>
         </div>
       </div>
-    </Section>
+      <div className={gridClassName}>
+        {items.map((item) => (
+          <PricingCard key={item.name} item={item} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PricingCard({ item }: { item: PricingItem }) {
+  return (
+    <article className="flex h-full flex-col rounded-lg border border-white/10 bg-[#101011] p-6 transition hover:-translate-y-1 hover:border-[#E6B8A2]/35 hover:bg-white/[0.045]">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#A1A1AA]">
+        {item.bestFor ? "Best For" : "Good For"}
+      </p>
+      <p className="mt-3 min-h-16 text-sm leading-6 text-[#C9C9C3]">
+        {item.bestFor || item.goodFor}
+      </p>
+      <div className="mt-6 border-t border-white/10 pt-6">
+        <h4 className="text-2xl font-semibold text-[#F5F5F2]">{item.name}</h4>
+        <p className="mt-3 text-3xl font-semibold text-[#E6B8A2]">
+          {item.startingAt}
+        </p>
+        <p className="mt-4 text-sm leading-6 text-[#BDBDB7]">
+          {item.positioning}
+        </p>
+      </div>
+      <ul className="mt-6 grid gap-3">
+        {item.features.map((feature) => (
+          <li key={feature} className="flex gap-3 text-sm leading-6 text-[#D7D7D1]">
+            <span className="mt-2 h-px w-4 shrink-0 bg-[#E6B8A2]" />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </article>
   );
 }
 
@@ -367,7 +516,7 @@ function AboutSection() {
       id="about"
       eyebrow="About"
       title="Technical depth paired with thoughtful design."
-      copy="This placeholder bio is structured for Trey, founder of Treydmark Tech, and can be tightened once the final resume details, background, and client story are ready."
+      copy="Treydmark Tech combines exceptional engineering, thoughtful design, and practical business strategy to build websites that perform as well as they look."
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="self-start rounded-lg border border-white/10 bg-[#101011] p-6">
@@ -387,10 +536,10 @@ function AboutSection() {
             I&apos;m Trey, the founder of Treydmark Tech.
           </h3>
           <p className="mt-5 text-base leading-8 text-[#C9C9C3]">
-            Our focus is building websites that feel polished, perform well,
-            and communicate clearly. My background in software engineering and
+            My focus is building websites that feel polished, perform well,
+            and communicate clearly. Having a background in software engineering and
             product development allows me to approach projects from both the
-            technical and visual side. Beyond design, I focus on usability,
+            technical and visual side. Beyond design, I value usability,
             performance, responsive layouts, SEO foundations, and the systems
             underneath the site that support long-term growth.
             <br /><br />
@@ -484,8 +633,8 @@ function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
       <div className="absolute right-0 top-0 -z-10 h-96 w-96 translate-x-1/3 rounded-full bg-[#E6B8A2]/10 blur-3xl" />
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <div>
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.02fr_0.98fr]">
+        <div className="max-w-4xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E6B8A2]">
             Start a project
           </p>

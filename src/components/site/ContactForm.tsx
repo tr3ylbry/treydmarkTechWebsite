@@ -1,10 +1,20 @@
 "use client";
 
-import { FormEvent, useState, useTransition } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  KeyboardEvent,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 
 type InquiryField =
   | "name"
   | "email"
+  | "phone"
   | "business"
   | "website"
   | "service"
@@ -29,10 +39,10 @@ const serviceOptions = [
 ];
 
 const budgetOptions = [
-  "$750 - $2,500",
-  "$2,500 - $5,000",
-  "$5,000 - $10,000",
-  "$10,000+",
+  "$1,000 - $3,000",
+  "$3,000 - $5,000",
+  "$5,000 - $15,000",
+  "$15,000+",
   "Not sure yet",
 ];
 
@@ -44,17 +54,21 @@ const timelineOptions = [
 ];
 
 const inputClassName =
-  "mt-2 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 py-3 text-sm text-[#F5F5F2] outline-none transition placeholder:text-[#73737A] focus:border-[#E6B8A2]/55";
+  "mt-2 h-12 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 text-sm text-[#F5F5F2] outline-none transition placeholder:text-[#73737A] focus:border-[#E6B8A2]/55 focus-visible:border-[#E6B8A2]/55";
 
 const initialState: FormState = {
   error: null,
   success: null,
 };
 
+const websitePrefix = "https://";
+
 export function ContactForm() {
   const [state, setState] = useState<FormState>(initialState);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [isPending, startTransition] = useTransition();
+  const [websiteValue, setWebsiteValue] = useState("");
+  const [formResetToken, setFormResetToken] = useState(0);
 
   function clearFieldError(field: InquiryField) {
     setFieldErrors((current) => {
@@ -66,6 +80,11 @@ export function ContactForm() {
       delete next[field];
       return next;
     });
+  }
+
+  function handleWebsiteChange(event: ChangeEvent<HTMLInputElement>) {
+    setWebsiteValue(stripWebsiteProtocol(event.target.value));
+    clearFieldError("website");
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -106,13 +125,16 @@ export function ContactForm() {
 
       if (!response.ok) {
         setState({
-          error: result.error || "The inquiry could not be sent. Please try again.",
+          error:
+            result.error || "The inquiry could not be sent. Please try again.",
           success: null,
         });
         return;
       }
 
       form.reset();
+      setWebsiteValue("");
+      setFormResetToken((current) => current + 1);
       setFieldErrors({});
       setState({
         error: null,
@@ -132,7 +154,7 @@ export function ContactForm() {
         <Field
           label="Name"
           name="name"
-          placeholder="Your name"
+          placeholder="Your Name"
           required
           error={fieldErrors.name}
           onValueChange={clearFieldError}
@@ -147,22 +169,27 @@ export function ContactForm() {
           onValueChange={clearFieldError}
         />
         <Field
+          label="Phone"
+          name="phone"
+          placeholder="(555) 555-5555"
+          type="tel"
+          error={fieldErrors.phone}
+          onValueChange={clearFieldError}
+        />
+        <Field
           label="Business Name"
           name="business"
           placeholder="Business Name"
           error={fieldErrors.business}
           onValueChange={clearFieldError}
         />
-        <Field
-          label="Existing Website URL (If Applicable)"
-          name="website"
-          placeholder="https://"
-          type="url"
-          defaultValue="https://"
+        <WebsiteField
+          value={websiteValue}
           error={fieldErrors.website}
-          onValueChange={clearFieldError}
+          onChange={handleWebsiteChange}
         />
-        <SelectField
+        <CustomSelectField
+          key={`service-${formResetToken}`}
           label="Service Interested In"
           name="service"
           options={serviceOptions}
@@ -170,7 +197,8 @@ export function ContactForm() {
           error={fieldErrors.service}
           onValueChange={clearFieldError}
         />
-        <SelectField
+        <CustomSelectField
+          key={`budget-${formResetToken}`}
           label="Budget Range"
           name="budget"
           options={budgetOptions}
@@ -178,7 +206,8 @@ export function ContactForm() {
           error={fieldErrors.budget}
           onValueChange={clearFieldError}
         />
-        <SelectField
+        <CustomSelectField
+          key={`timeline-${formResetToken}`}
           label="Timeline"
           name="timeline"
           options={timelineOptions}
@@ -199,7 +228,7 @@ export function ContactForm() {
             rows={6}
             required
             placeholder="What needs to change, what is working now, and what would make the project successful?"
-            className={`${inputClassName} ${
+            className={`mt-2 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 py-3 text-sm text-[#F5F5F2] outline-none transition placeholder:text-[#73737A] focus:border-[#E6B8A2]/55 focus-visible:border-[#E6B8A2]/55 ${
               fieldErrors.message ? "border-[#F8AFAF]" : ""
             }`}
             onChange={() => clearFieldError("message")}
@@ -224,17 +253,27 @@ export function ContactForm() {
             state.error ? "text-[#F8AFAF]" : "text-[#C9C9C3]"
           }`}
         >
-          {state.error || state.success || "Replies route through the email address you enter above."}
+          {state.error ||
+            state.success ||
+            "Replies route through the email address you enter above."}
         </p>
       </div>
     </form>
   );
 }
 
+function stripWebsiteProtocol(value: string) {
+  return value.replace(/^\s*https?:\/\//i, "").trimStart();
+}
+
+function getWebsiteSubmissionValue(value: string) {
+  const trimmedValue = stripWebsiteProtocol(value).trim();
+  return trimmedValue ? `${websitePrefix}${trimmedValue}` : "";
+}
+
 function validateInquiryForm(values: Record<InquiryField, string>) {
   const errors: FieldErrors = {};
   const trimmedWebsite = values.website.trim();
-  const hasWebsiteValue = trimmedWebsite !== "" && trimmedWebsite !== "https://";
 
   if (!values.name.trim()) {
     errors.name = "Please enter your name.";
@@ -244,6 +283,10 @@ function validateInquiryForm(values: Record<InquiryField, string>) {
     errors.email = "Please enter your email address.";
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
     errors.email = "Please enter a valid email address.";
+  }
+
+  if (values.phone.trim() && !/^[0-9()+\-\s.]{7,}$/.test(values.phone.trim())) {
+    errors.phone = "Please enter a valid phone number.";
   }
 
   if (!values.service.trim()) {
@@ -261,14 +304,13 @@ function validateInquiryForm(values: Record<InquiryField, string>) {
   if (!values.message.trim()) {
     errors.message = "Please describe the project goals.";
   } else if (values.message.trim().length < 20) {
-    errors.message = "Add a little more detail so the inquiry has enough context.";
+    errors.message =
+      "Add a little more detail so the inquiry has enough context.";
   }
 
-  if (trimmedWebsite === "https://") {
-    errors.website = "Add the rest of the website address or leave this field blank.";
-  } else if (hasWebsiteValue) {
+  if (trimmedWebsite) {
     try {
-      const url = new URL(trimmedWebsite);
+      const url = new URL(getWebsiteSubmissionValue(trimmedWebsite));
       if (!url.hostname.includes(".")) {
         errors.website = "Please enter a full website URL.";
       }
@@ -319,7 +361,56 @@ function Field({
   );
 }
 
-function SelectField({
+function WebsiteField({
+  value,
+  error,
+  onChange,
+}: {
+  value: string;
+  error?: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}) {
+  return (
+    <div>
+      <label
+        htmlFor="website-display"
+        className="text-sm font-medium text-[#F5F5F2]"
+      >
+        Existing Website URL (If Applicable)
+      </label>
+      <div
+        className={`mt-2 flex h-12 items-center rounded-md border bg-[#0B0B0C] px-3 transition focus-within:border-[#E6B8A2]/55 ${
+          error ? "border-[#F8AFAF]" : "border-white/10"
+        }`}
+      >
+        <span className="mr-3 inline-flex h-8 shrink-0 items-center rounded-full border border-white/12 bg-[#232326] px-3 text-sm text-[#B8B8BE]">
+          {websitePrefix}
+        </span>
+        <input
+          id="website-display"
+          type="text"
+          inputMode="url"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          value={value}
+          onChange={onChange}
+          placeholder="yourbusiness.com"
+          aria-describedby={error ? "website-error" : undefined}
+          className="h-full w-full bg-transparent text-sm text-[#F5F5F2] outline-none placeholder:text-[#73737A]"
+        />
+        <input type="hidden" name="website" value={getWebsiteSubmissionValue(value)} />
+      </div>
+      {error ? (
+        <p id="website-error" className="mt-2 text-sm text-[#F8AFAF]">
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function CustomSelectField({
   label,
   name,
   options,
@@ -334,27 +425,178 @@ function SelectField({
   error?: string;
   onValueChange: (field: InquiryField) => void;
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
+  const listboxId = useId();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    function handlePointerDown(event: MouseEvent) {
+      if (!containerRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    function handleWindowBlur() {
+      setIsOpen(false);
+    }
+
+    window.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("blur", handleWindowBlur);
+
+    return () => {
+      window.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("blur", handleWindowBlur);
+    };
+  }, [isOpen]);
+
+  function commitSelection(option: string) {
+    setSelectedValue(option);
+    setHighlightedIndex(options.indexOf(option));
+    setIsOpen(false);
+    onValueChange(name);
+  }
+
+  function handleButtonKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      setIsOpen(true);
+      setHighlightedIndex((current) => {
+        if (selectedValue) {
+          return options.indexOf(selectedValue);
+        }
+        return current;
+      });
+      return;
+    }
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setIsOpen((current) => !current);
+      return;
+    }
+
+    if (event.key === "Escape") {
+      setIsOpen(false);
+    }
+  }
+
+  function handleListboxKeyDown(event: KeyboardEvent<HTMLUListElement>) {
+    if (event.key === "Escape" || event.key === "Tab") {
+      setIsOpen(false);
+      return;
+    }
+
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setHighlightedIndex((current) => Math.min(current + 1, options.length - 1));
+      return;
+    }
+
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setHighlightedIndex((current) => Math.max(current - 1, 0));
+      return;
+    }
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      commitSelection(options[highlightedIndex]);
+    }
+  }
+
   return (
-    <div>
-      <label htmlFor={name} className="text-sm font-medium text-[#F5F5F2]">
+    <div ref={containerRef} className="relative">
+      <label htmlFor={`${name}-trigger`} className="text-sm font-medium text-[#F5F5F2]">
         {label}
       </label>
-      <select
-        id={name}
-        name={name}
-        defaultValue=""
-        required={required}
-        className={`${inputClassName} ${error ? "border-[#F8AFAF]" : ""}`}
-        onChange={() => onValueChange(name)}
+      <input type="hidden" name={name} value={selectedValue} required={required} />
+      <button
+        id={`${name}-trigger`}
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={listboxId}
+        aria-describedby={error ? `${name}-error` : undefined}
+        onClick={() => setIsOpen((current) => !current)}
+        onKeyDown={handleButtonKeyDown}
+        className={`${inputClassName} relative flex items-center justify-between text-left ${
+          error ? "border-[#F8AFAF]" : ""
+        } ${selectedValue ? "text-[#F5F5F2]" : "text-[#73737A]"}`}
       >
-        <option value="" disabled>
-          Select an option
-        </option>
-        {options.map((option) => (
-          <option key={option}>{option}</option>
-        ))}
-      </select>
-      {error ? <p className="mt-2 text-sm text-[#F8AFAF]">{error}</p> : null}
+        <span className="truncate pr-6">
+          {selectedValue || "Select an option"}
+        </span>
+        <span
+          aria-hidden="true"
+          className={`absolute inset-y-0 right-4 flex items-center text-[#A1A1AA] transition ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="block"
+          >
+            <path
+              d="M3 5.25L7 9.25L11 5.25"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </button>
+      {isOpen ? (
+        <ul
+          id={listboxId}
+          role="listbox"
+          tabIndex={-1}
+          aria-labelledby={`${name}-trigger`}
+          onKeyDown={handleListboxKeyDown}
+          className="absolute z-20 mt-2 max-h-64 w-full overflow-auto rounded-md border border-white/10 bg-[#111113] p-1 shadow-2xl shadow-black/50"
+        >
+          {options.map((option, index) => {
+            const isSelected = option === selectedValue;
+            const isHighlighted = index === highlightedIndex;
+
+            return (
+              <li
+                key={option}
+                id={`${listboxId}-${index}`}
+                role="option"
+                aria-selected={isSelected}
+                onMouseEnter={() => setHighlightedIndex(index)}
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => commitSelection(option)}
+                className={`cursor-pointer rounded-md px-3 py-3 text-sm transition ${
+                  isSelected
+                    ? "bg-[#E6B8A2] text-[#0B0B0C]"
+                    : isHighlighted
+                      ? "bg-white/8 text-[#F5F5F2]"
+                      : "text-[#D2D2CC]"
+                }`}
+              >
+                {option}
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+      {error ? (
+        <p id={`${name}-error`} className="mt-2 text-sm text-[#F8AFAF]">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }

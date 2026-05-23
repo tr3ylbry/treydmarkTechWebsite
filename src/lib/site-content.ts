@@ -61,6 +61,7 @@ export const portfolioProjects = [
       "A polished artist website built to showcase music, visuals, performance energy, and booking flows with an immersive creative presence.",
     tags: ["Musical & Visual Showcase", "Artist Branding", "Content Driven"],
     tone: "Media • Identity • Booking",
+    href: "https://www.jw-xperience.com/",
   },
   {
     title: "Local Service Business Redesign",
@@ -115,42 +116,137 @@ export const processSteps = [
   },
 ];
 
-export const projectTiers = [
+export const mainBuildTiers = [
   {
-    name: "Website Redesign",
-    price: "Starting at $750",
-    description:
-      "Best for businesses that already have a site, but need better organization, faster loading, and clearer communication.",
+    name: "Starter Site",
+    startingAt: "Starting at $2,000",
+    bestFor:
+      "Local businesses, musicians, artists, photographers, contractors, restaurants, solo professionals, and startups that need a polished web presence.",
+    positioning:
+      "A professionally designed custom website built for trust, presentation quality, responsive UX, and a stronger first impression.",
+    features: [
+      "Custom Modern Responsive Design",
+      "4-6 Core Pages",
+      "Contact & Inquiry Forms",
+      "Domain & Deployment Setup",
+      "Basic SEO Structure",
+      "Analytics & Launch Support",
+    ],
   },
   {
-    name: "New Business Website",
-    price: "Starting at $2,500",
-    description:
-      "Best for new or growing businesses that need a complete, professional website built from the ground up.",
+    name: "Growth Website",
+    startingAt: "Starting at $5,000",
+    bestFor:
+      "Growing businesses, marketing-driven brands, and teams that need stronger lead generation, premium UX, and deeper customization.",
+    positioning:
+      "A strategic business asset built for credibility, customer conversion, search visibility, and long-term marketing momentum.",
+    features: [
+      "Everything From Starter",
+      "Advanced Layouts & Interactions",
+      "CMS or Blog Integration",
+      "Booking & Inquiry Flows",
+      "Enhanced SEO Setup",
+      "Performance Optimization",
+    ],
   },
   {
-    name: "Integrated Web Platform",
-    price: "Custom Quote",
-    description:
-      "Best for businesses that need e-commerce, dashboards, booking systems, internal tools, or connected web and mobile experiences.",
+    name: "Custom Platform / App",
+    startingAt: "Starting at $15,000",
+    bestFor:
+      "Custom business tools, dashboards, SaaS MVPs, member portals, booking systems, mobile apps, and internal operational software.",
+    positioning:
+      "Software consulting and product development for businesses that need scalable functionality beyond a standard marketing site.",
+    features: [
+      "Custom Application Functionality",
+      "Authentication & Accounts",
+      "Databases & Admin Dashboards",
+      "APIs & Integrations",
+      "Subscriptions & Payments",
+      "Scalable Architecture",
+    ],
   },
 ];
 
-export const carePlans = [
+export const modernizationServices = [
   {
-    name: "Essential Support",
-    description:
-      "Hosting oversight, backups, uptime checks, security awareness, and small site updates.",
+    name: "Minor Refresh",
+    startingAt: "Starting at $1,000",
+    goodFor:
+      "Smaller-scope improvements to visual polish, responsiveness, layouts, content, and images without a full rebuild.",
+    positioning:
+      "Targeted modernization for existing sites that need cleanup, not major platform migration or custom application work.",
+    features: [
+      "Visual Modernization",
+      "Responsiveness Improvements",
+      "Layout Cleanup",
+      "Content & Image Refresh",
+    ],
   },
   {
-    name: "Growth Support",
-    description:
-      "SEO monitoring, analytics review, content updates, and ongoing improvement recommendations.",
+    name: "Major Redesign / Migration",
+    startingAt: "Starting at $3,000",
+    goodFor:
+      "Complete visual overhauls, platform migrations, architecture restructuring, branding refreshes, and old business site rebuilds.",
+    positioning:
+      "A modernization path for businesses ready to move away from outdated platforms and into scalable modern infrastructure.",
+    features: [
+      "Complete Visual Overhaul",
+      "Modern Rebuild",
+      "Site Architecture Restructuring",
+      "Brand & Content Refresh",
+      "Migration From Existing Platforms",
+    ],
+  },
+];
+
+export const growthPlans = [
+  {
+    name: "Essential Care Plan",
+    startingAt: "Starting at $99/mo",
+    bestFor:
+      "Businesses that want peace-of-mind management for a professionally maintained site.",
+    positioning:
+      "Managed infrastructure and support so the site stays monitored, backed up, and cared for after launch.",
+    features: [
+      "Managed Hosting",
+      "Uptime Monitoring",
+      "Site Backups",
+      "Security Updates",
+      "Small Content Edits",
+      "Ongoing Support",
+    ],
   },
   {
-    name: "Strategic Partnership",
-    description:
-      "Ongoing development, SEO and content strategy, priority support, and deeper site evolution.",
+    name: "Growth Plan",
+    startingAt: "Starting at $299/mo",
+    bestFor:
+      "Businesses actively investing in their online presence and ongoing digital improvement.",
+    positioning:
+      "Active digital growth support focused on analytics, SEO, content updates, and month-to-month optimization.",
+    features: [
+      "Everything In Essential Care",
+      "Analytics Reporting",
+      "SEO Improvements",
+      "Monthly Optimization",
+      "Content & Image Updates",
+      "Active Support & Consultation",
+    ],
+  },
+  {
+    name: "Active Growth / Partner Plan",
+    startingAt: "Starting at $1,000/mo",
+    bestFor:
+      "Serious businesses that need a fractional digital/software partner for ongoing iteration and new functionality.",
+    positioning:
+      "A recurring partnership for strategy, landing pages, feature additions, conversion improvements, and priority support.",
+    features: [
+      "Ongoing Development",
+      "Landing Pages",
+      "Feature Additions",
+      "Conversion Optimization",
+      "Strategy Collaboration",
+      "Priority Support & Consultation",
+    ],
   },
 ];
 
