@@ -2,13 +2,13 @@
 
 import {
   ChangeEvent,
+  type CSSProperties,
   FormEvent,
   KeyboardEvent,
   useEffect,
   useId,
   useRef,
   useState,
-  useTransition,
 } from "react";
 
 type InquiryField =
@@ -22,20 +22,16 @@ type InquiryField =
   | "timeline"
   | "message";
 
-type FormState = {
-  error: string | null;
-  success: string | null;
-};
-
 type FieldErrors = Partial<Record<InquiryField, string>>;
 
 const serviceOptions = [
-  "Website Redesign",
-  "New Business Website",
-  "Advanced Web Platform",
-  "Logo and Brand Refresh",
-  "SEO Setup",
+  "Starter Site",
+  "Growth Website",
+  "Custom Platform / App",
+  "Minor Refresh",
+  "Major Redesign / Migration",
   "Ongoing Support",
+  "Other",
 ];
 
 const budgetOptions = [
@@ -54,21 +50,19 @@ const timelineOptions = [
 ];
 
 const inputClassName =
-  "mt-2 h-12 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 text-sm text-[#F5F5F2] outline-none transition placeholder:text-[#73737A] focus:border-[#E6B8A2]/55 focus-visible:border-[#E6B8A2]/55";
-
-const initialState: FormState = {
-  error: null,
-  success: null,
-};
+  "interactive-field mt-2 h-12 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 text-sm text-[#F5F5F2] outline-none placeholder:text-[#73737A]";
 
 const websitePrefix = "https://";
+const genericSubmitError =
+  "The inquiry could not be sent. Please try again in a few minutes.";
 
 export function ContactForm() {
-  const [state, setState] = useState<FormState>(initialState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
-  const [isPending, startTransition] = useTransition();
   const [websiteValue, setWebsiteValue] = useState("");
-  const [formResetToken, setFormResetToken] = useState(0);
+  const [resetToken, setResetToken] = useState(0);
 
   function clearFieldError(field: InquiryField) {
     setFieldErrors((current) => {
@@ -87,7 +81,7 @@ export function ContactForm() {
     clearFieldError("website");
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -98,18 +92,17 @@ export function ContactForm() {
     >;
     const nextFieldErrors = validateInquiryForm(payload);
 
-    setState(initialState);
+    setSubmitError(null);
+    setSubmitSuccess(null);
     setFieldErrors(nextFieldErrors);
 
     if (Object.keys(nextFieldErrors).length > 0) {
-      setState({
-        error: "Please fix the highlighted fields and try again.",
-        success: null,
-      });
       return;
     }
 
-    startTransition(async () => {
+    setIsSubmitting(true);
+
+    try {
       const response = await fetch("/api/inquiry", {
         method: "POST",
         headers: {
@@ -118,39 +111,32 @@ export function ContactForm() {
         body: JSON.stringify(payload),
       });
 
-      const result = (await response.json()) as {
-        error?: string;
-        success?: boolean;
-      };
-
       if (!response.ok) {
-        setState({
-          error:
-            result.error || "The inquiry could not be sent. Please try again.",
-          success: null,
-        });
+        setSubmitError(await getSafeSubmitError(response));
         return;
       }
 
       form.reset();
       setWebsiteValue("");
-      setFormResetToken((current) => current + 1);
       setFieldErrors({});
-      setState({
-        error: null,
-        success:
-          "Inquiry sent. I will review the details and follow up from the reply-to email you provided.",
-      });
-    });
+      setResetToken((current) => current + 1);
+      setSubmitSuccess(
+        "Inquiry sent. I will review the details and follow up from the reply-to email you provided."
+      );
+    } catch {
+      setSubmitError(genericSubmitError);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-lg border border-white/10 bg-[#101011] p-5 shadow-2xl shadow-black/30 sm:p-7"
+      className="rounded-lg border border-white/10 bg-[#101011] p-5 shadow-[var(--surface-shadow)] sm:p-7"
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 md:gap-5">
         <Field
           label="Name"
           name="name"
@@ -189,7 +175,7 @@ export function ContactForm() {
           onChange={handleWebsiteChange}
         />
         <CustomSelectField
-          key={`service-${formResetToken}`}
+          key={`service-${resetToken}`}
           label="Service Interested In"
           name="service"
           options={serviceOptions}
@@ -198,7 +184,7 @@ export function ContactForm() {
           onValueChange={clearFieldError}
         />
         <CustomSelectField
-          key={`budget-${formResetToken}`}
+          key={`budget-${resetToken}`}
           label="Budget Range"
           name="budget"
           options={budgetOptions}
@@ -207,7 +193,7 @@ export function ContactForm() {
           onValueChange={clearFieldError}
         />
         <CustomSelectField
-          key={`timeline-${formResetToken}`}
+          key={`timeline-${resetToken}`}
           label="Timeline"
           name="timeline"
           options={timelineOptions}
@@ -227,34 +213,36 @@ export function ContactForm() {
             name="message"
             rows={6}
             required
+            minLength={20}
             placeholder="What needs to change, what is working now, and what would make the project successful?"
-            className={`mt-2 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 py-3 text-sm text-[#F5F5F2] outline-none transition placeholder:text-[#73737A] focus:border-[#E6B8A2]/55 focus-visible:border-[#E6B8A2]/55 ${
+            aria-invalid={Boolean(fieldErrors.message)}
+            aria-describedby={fieldErrors.message ? "message-error" : undefined}
+            data-invalid={fieldErrors.message ? "true" : undefined}
+            className={`interactive-field mt-2 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 py-3 text-sm text-[#F5F5F2] outline-none placeholder:text-[#73737A] ${
               fieldErrors.message ? "border-[#F8AFAF]" : ""
             }`}
             onChange={() => clearFieldError("message")}
           />
-          {fieldErrors.message ? (
-            <p className="mt-2 text-sm text-[#F8AFAF]">{fieldErrors.message}</p>
-          ) : null}
+          <FieldError id="message-error" message={fieldErrors.message} />
         </div>
       </div>
 
       <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
         <button
           type="submit"
-          disabled={isPending}
-          className="w-full rounded-full bg-[#E6B8A2] px-6 py-4 text-sm font-semibold text-[#0B0B0C] transition hover:-translate-y-0.5 hover:bg-[#F1C8B8] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+          disabled={isSubmitting}
+          className="interactive-button w-full rounded-full bg-[#E6B8A2] px-6 py-4 text-sm font-semibold text-[#0B0B0C] hover:bg-[#F1C8B8] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
         >
-          {isPending ? "Sending..." : "Start a Project"}
+          {isSubmitting ? "Sending..." : "Start a Project"}
         </button>
         <p
           aria-live="polite"
           className={`text-sm ${
-            state.error ? "text-[#F8AFAF]" : "text-[#C9C9C3]"
+            submitError ? "text-[#F8AFAF]" : "text-[#C9C9C3]"
           }`}
         >
-          {state.error ||
-            state.success ||
+          {submitError ||
+            submitSuccess ||
             "Replies route through the email address you enter above."}
         </p>
       </div>
@@ -276,50 +264,75 @@ function validateInquiryForm(values: Record<InquiryField, string>) {
   const trimmedWebsite = values.website.trim();
 
   if (!values.name.trim()) {
-    errors.name = "Please enter your name.";
+    errors.name = "Name is required.";
   }
 
   if (!values.email.trim()) {
-    errors.email = "Please enter your email address.";
+    errors.email = "Email is required.";
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
-    errors.email = "Please enter a valid email address.";
+    errors.email = "Enter a valid email address.";
   }
 
   if (values.phone.trim() && !/^[0-9()+\-\s.]{7,}$/.test(values.phone.trim())) {
-    errors.phone = "Please enter a valid phone number.";
+    errors.phone = "Enter a valid phone number.";
   }
 
   if (!values.service.trim()) {
-    errors.service = "Please choose the service you are interested in.";
+    errors.service = "Select a service.";
   }
 
   if (!values.budget.trim()) {
-    errors.budget = "Please select a budget range.";
+    errors.budget = "Select a budget range.";
   }
 
   if (!values.timeline.trim()) {
-    errors.timeline = "Please select a timeline.";
+    errors.timeline = "Select a timeline.";
   }
 
   if (!values.message.trim()) {
-    errors.message = "Please describe the project goals.";
+    errors.message = "Message is required.";
   } else if (values.message.trim().length < 20) {
-    errors.message =
-      "Add a little more detail so the inquiry has enough context.";
+    errors.message = "Add a little more detail.";
   }
 
   if (trimmedWebsite) {
     try {
       const url = new URL(getWebsiteSubmissionValue(trimmedWebsite));
       if (!url.hostname.includes(".")) {
-        errors.website = "Please enter a full website URL.";
+        errors.website = "Enter a full website URL.";
       }
     } catch {
-      errors.website = "Please enter a valid website URL.";
+      errors.website = "Enter a valid website URL.";
     }
   }
 
   return errors;
+}
+
+async function getSafeSubmitError(response: Response) {
+  try {
+    const result = (await response.json()) as { error?: unknown };
+
+    if (typeof result.error === "string") {
+      if (result.error.toLowerCase().includes("missing required field")) {
+        return "Please complete the required fields and try again.";
+      }
+
+      if (isSafeUserFacingError(result.error)) {
+        return result.error;
+      }
+    }
+  } catch {
+    return genericSubmitError;
+  }
+
+  return genericSubmitError;
+}
+
+function isSafeUserFacingError(message: string) {
+  return !/api|apikey|key|token|secret|resend|environment|contact_email|stack|trace/i.test(
+    message
+  );
 }
 
 function Field({
@@ -328,7 +341,6 @@ function Field({
   placeholder,
   type = "text",
   required = false,
-  defaultValue,
   error,
   onValueChange,
 }: {
@@ -337,10 +349,11 @@ function Field({
   placeholder: string;
   type?: string;
   required?: boolean;
-  defaultValue?: string;
   error?: string;
   onValueChange: (field: InquiryField) => void;
 }) {
+  const errorId = `${name}-error`;
+
   return (
     <div>
       <label htmlFor={name} className="text-sm font-medium text-[#F5F5F2]">
@@ -352,11 +365,13 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errorId : undefined}
+        data-invalid={error ? "true" : undefined}
         className={`${inputClassName} ${error ? "border-[#F8AFAF]" : ""}`}
-        defaultValue={defaultValue}
         onChange={() => onValueChange(name)}
       />
-      {error ? <p className="mt-2 text-sm text-[#F8AFAF]">{error}</p> : null}
+      <FieldError id={errorId} message={error} />
     </div>
   );
 }
@@ -379,7 +394,8 @@ function WebsiteField({
         Existing Website URL (If Applicable)
       </label>
       <div
-        className={`mt-2 flex h-12 items-center rounded-md border bg-[#0B0B0C] px-3 transition focus-within:border-[#E6B8A2]/55 ${
+        data-invalid={error ? "true" : undefined}
+        className={`interactive-field mt-2 flex h-12 items-center rounded-md border bg-[#0B0B0C] px-3 ${
           error ? "border-[#F8AFAF]" : "border-white/10"
         }`}
       >
@@ -396,16 +412,17 @@ function WebsiteField({
           value={value}
           onChange={onChange}
           placeholder="yourbusiness.com"
+          aria-invalid={Boolean(error)}
           aria-describedby={error ? "website-error" : undefined}
           className="h-full w-full bg-transparent text-sm text-[#F5F5F2] outline-none placeholder:text-[#73737A]"
         />
-        <input type="hidden" name="website" value={getWebsiteSubmissionValue(value)} />
+        <input
+          type="hidden"
+          name="website"
+          value={getWebsiteSubmissionValue(value)}
+        />
       </div>
-      {error ? (
-        <p id="website-error" className="mt-2 text-sm text-[#F8AFAF]">
-          {error}
-        </p>
-      ) : null}
+      <FieldError id="website-error" message={error} />
     </div>
   );
 }
@@ -430,10 +447,45 @@ function CustomSelectField({
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const listboxId = useId();
   const containerRef = useRef<HTMLDivElement>(null);
+  const listboxRef = useRef<HTMLUListElement>(null);
+  const [hasOverflow, setHasOverflow] = useState(false);
+  const [listboxStyle, setListboxStyle] = useState<CSSProperties>({});
+  const errorId = `${name}-error`;
 
   useEffect(() => {
     if (!isOpen) {
       return;
+    }
+
+    function updateListboxPosition() {
+      const trigger = containerRef.current?.querySelector("button");
+      const triggerRect = trigger?.getBoundingClientRect();
+
+      if (!triggerRect) {
+        return;
+      }
+
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+      const viewportOffsetTop = window.visualViewport?.offsetTop ?? 0;
+      const gap = 8;
+      const availableBelow = viewportHeight - triggerRect.bottom - gap;
+      const availableAbove = triggerRect.top - viewportOffsetTop - gap;
+      const openAbove = availableBelow < 220 && availableAbove > availableBelow;
+      const availableSpace = Math.max(openAbove ? availableAbove : availableBelow, 168);
+      const maxHeight = Math.min(256, availableSpace);
+
+      setListboxStyle({
+        left: triggerRect.left,
+        width: triggerRect.width,
+        maxHeight,
+        top: openAbove ? undefined : triggerRect.bottom + gap,
+        bottom: openAbove ? viewportHeight - triggerRect.top + gap : undefined,
+      });
+
+      window.requestAnimationFrame(() => {
+        const listbox = listboxRef.current;
+        setHasOverflow(Boolean(listbox && listbox.scrollHeight > listbox.clientHeight));
+      });
     }
 
     function handlePointerDown(event: MouseEvent) {
@@ -446,10 +498,15 @@ function CustomSelectField({
       setIsOpen(false);
     }
 
+    updateListboxPosition();
+    window.addEventListener("resize", updateListboxPosition);
+    window.visualViewport?.addEventListener("resize", updateListboxPosition);
     window.addEventListener("mousedown", handlePointerDown);
     window.addEventListener("blur", handleWindowBlur);
 
     return () => {
+      window.removeEventListener("resize", updateListboxPosition);
+      window.visualViewport?.removeEventListener("resize", updateListboxPosition);
       window.removeEventListener("mousedown", handlePointerDown);
       window.removeEventListener("blur", handleWindowBlur);
     };
@@ -519,12 +576,15 @@ function CustomSelectField({
       <button
         id={`${name}-trigger`}
         type="button"
+        role="combobox"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls={listboxId}
-        aria-describedby={error ? `${name}-error` : undefined}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errorId : undefined}
         onClick={() => setIsOpen((current) => !current)}
         onKeyDown={handleButtonKeyDown}
+        data-invalid={error ? "true" : undefined}
         className={`${inputClassName} relative flex items-center justify-between text-left ${
           error ? "border-[#F8AFAF]" : ""
         } ${selectedValue ? "text-[#F5F5F2]" : "text-[#73737A]"}`}
@@ -563,7 +623,11 @@ function CustomSelectField({
           tabIndex={-1}
           aria-labelledby={`${name}-trigger`}
           onKeyDown={handleListboxKeyDown}
-          className="absolute z-20 mt-2 max-h-64 w-full overflow-auto rounded-md border border-white/10 bg-[#111113] p-1 shadow-2xl shadow-black/50"
+          ref={listboxRef}
+          style={listboxStyle}
+          className={`fixed z-[70] overflow-y-auto overscroll-contain rounded-md border border-white/10 bg-[#111113] p-1 shadow-[0_20px_52px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.07)] ${
+            hasOverflow ? "custom-dropdown-scroll pr-2" : ""
+          }`}
         >
           {options.map((option, index) => {
             const isSelected = option === selectedValue;
@@ -592,11 +656,19 @@ function CustomSelectField({
           })}
         </ul>
       ) : null}
-      {error ? (
-        <p id={`${name}-error`} className="mt-2 text-sm text-[#F8AFAF]">
-          {error}
-        </p>
-      ) : null}
+      <FieldError id={errorId} message={error} />
     </div>
+  );
+}
+
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) {
+    return null;
+  }
+
+  return (
+    <p id={id} className="mt-2 text-sm font-medium text-[#F8AFAF]">
+      {message}
+    </p>
   );
 }

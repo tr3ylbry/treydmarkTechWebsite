@@ -175,18 +175,18 @@ export const mainBuildTiers = [
   },
   {
     name: "Custom Platform / App",
-    startingAt: "Starting at $15,000",
+    startingAt: "Custom Quote",
     bestFor:
       "Custom business tools, dashboards, SaaS MVPs, member portals, booking systems, mobile apps, and internal operational software.",
     positioning:
       "Software consulting and product development for businesses that need scalable functionality beyond a standard marketing site.",
     features: [
+      "Everything From Growth",
       "Custom Application Functionality",
       "Authentication & Accounts",
       "Databases & Admin Dashboards",
       "APIs & Integrations",
       "Subscriptions & Payments",
-      "Scalable Architecture",
     ],
   },
 ];
@@ -246,7 +246,7 @@ export const growthPlans = [
     bestFor:
       "Businesses actively investing in their online presence and ongoing digital improvement.",
     positioning:
-      "Active digital growth support focused on analytics, SEO, content updates, and month-to-month optimization.",
+      "Active growth support focused on analytics, SEO, content updates, and month-to-month optimization.",
     features: [
       "Everything In Essential Care",
       "Analytics Reporting",
@@ -257,33 +257,21 @@ export const growthPlans = [
     ],
   },
   {
-    name: "Partner Plan",
-    startingAt: "Starting at $1,000/mo",
+    name: "Custom Growth Partnership",
+    startingAt: "Starting at $750/mo",
     bestFor:
-      "Serious businesses that need a fractional digital/software partner for ongoing iteration and new functionality.",
+      "Serious businesses that need a digital partner for ongoing iteration and new functionality.",
     positioning:
-      "A recurring partnership for strategy, landing pages, feature additions, conversion improvements, and priority support.",
+      "A recurring partnership for strategy, feature additions, conversion improvements, and priority support.",
     features: [
+      "Everything In Growth",
       "Ongoing Development",
-      "Landing Pages",
       "Feature Additions",
       "Conversion Optimization",
       "Strategy Collaboration",
       "Priority Support & Consultation",
     ],
   },
-];
-
-export const detailedServices = [
-  "Lead Generation Systems",
-  "Booking & Scheduling",
-  "Artist / Media Portfolios",
-  "E-Commerce Experiences",
-  "Membership & Account Systems",
-  "Analytics & Search Visibility",
-  "Client Portals & Dashboards",
-  "Multi-Platform Brand Presence",
-  "Ongoing Growth Support",
 ];
 
 export const reasons = [

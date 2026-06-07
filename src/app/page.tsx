@@ -1,12 +1,17 @@
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { ContactForm } from "@/components/site/ContactForm";
+import {
+  MotionAnchor,
+  MotionCard,
+  MotionReveal,
+  MotionStagger,
+} from "@/components/site/Motion";
 import Image from "next/image";
 import {
   growthPlans,
   mainBuildTiers,
   modernizationServices,
-  detailedServices,
   portfolioProjects,
   processSteps,
   servicePreviews,
@@ -15,14 +20,13 @@ import {
 
 export default function Home() {
   return (
-    <div id="top" className="min-h-screen bg-[#0B0B0C] text-[#F5F5F2]">
+    <div id="top" className="min-h-[100svh] bg-[#0B0B0C] text-[#F5F5F2]">
       <Header />
       <main>
         <HeroSection />
         <PortfolioPreview />
         <AboutSection />
         <ServicesPreview />
-        <ServicesDetail />
         <ProcessSection />
         <PricingSection />
         <ContactSection />
@@ -38,33 +42,33 @@ function HeroSection() {
       <div className="site-grid absolute inset-0 -z-20 opacity-70" />
       <div className="absolute left-1/2 top-16 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#E6B8A2]/12 blur-3xl sm:h-96 sm:w-96" />
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 sm:px-8 lg:grid-cols-[1.02fr_0.98fr] lg:px-10 lg:pb-28">
-        <div className="fade-up">
+        <MotionReveal>
           <p className="mb-5 inline-flex rounded-full border border-[#E6B8A2]/25 bg-[#E6B8A2]/8 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[#E6B8A2]">
             MODERN DIGITAL STRATEGY
           </p>
-          <h1 className="max-w-4xl text-5xl font-semibold leading-[1.02] text-[#F5F5F2] sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl text-[2.75rem] font-semibold leading-[1.04] text-[#F5F5F2] sm:text-6xl sm:leading-[1.02] lg:text-7xl lg:leading-[0.99]">
             Intentionally crafted websites for businesses ready to grow.
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-[#C9C9C3] sm:text-xl">
+          <p className="mt-7 max-w-[40rem] text-lg leading-8 text-[#C9C9C3] sm:text-xl sm:leading-9">
             Treydmark Tech helps small and medium-sized businesses build sharper
             websites, stronger branding, and a cleaner digital presence designed
             to turn visitors into real inquiries.
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-            <a
+            <MotionAnchor
               href="#contact"
-              className="inline-flex items-center justify-center rounded-full bg-[#E6B8A2] px-6 py-4 text-sm font-semibold text-[#0B0B0C] shadow-[0_0_34px_rgba(230,184,162,0.2)] transition hover:-translate-y-0.5 hover:bg-[#F1C8B8]"
+              className="interactive-button inline-flex items-center justify-center rounded-full bg-[#E6B8A2] px-6 py-4 text-sm font-semibold text-[#0B0B0C] shadow-[0_0_34px_rgba(230,184,162,0.2)] hover:bg-[#F1C8B8]"
             >
               Start a Project
-            </a>
-            <a
+            </MotionAnchor>
+            <MotionAnchor
               href="#work"
-              className="inline-flex items-center justify-center rounded-full border border-white/14 px-6 py-4 text-sm font-semibold text-[#F5F5F2] transition hover:-translate-y-0.5 hover:border-[#E6B8A2]/45 hover:bg-white/[0.04]"
+              className="interactive-button secondary-cta inline-flex items-center justify-center rounded-full border border-white/14 px-6 py-4 text-sm font-semibold text-[#F5F5F2] hover:bg-white/[0.04]"
             >
               View Work
-            </a>
+            </MotionAnchor>
           </div>
-        </div>
+        </MotionReveal>
         <HeroVisual />
       </div>
     </section>
@@ -73,8 +77,8 @@ function HeroSection() {
 
 function HeroVisual() {
   return (
-    <div className="fade-up-delay relative mx-auto w-full max-w-xl">
-      <div className="absolute -inset-6 rounded-lg bg-[#E6B8A2]/8 blur-3xl" />
+    <MotionReveal delay={0.1} className="relative mx-auto w-full max-w-xl">
+      <div className="absolute -inset-3 rounded-lg bg-[#E6B8A2]/8 blur-3xl sm:-inset-6" />
       <div className="relative overflow-hidden rounded-lg border border-white/12 bg-[#111113]/92 p-4 shadow-2xl shadow-black/50">
         <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-4">
           <div className="flex gap-2">
@@ -131,7 +135,7 @@ function HeroVisual() {
           </div>
         </div>
       </div>
-    </div>
+    </MotionReveal>
   );
 }
 
@@ -139,15 +143,16 @@ function ServicesPreview() {
   return (
     <Section
       id="services"
+      className="section-soft-transition section-vertical-texture pt-24 pb-28 sm:pt-28 sm:pb-32 lg:pt-36 lg:pb-40"
       eyebrow="Services"
       title="Practical web systems built for real business needs."
       copy="From business websites to booking flows, ecommerce, and internal tools, the work is shaped into clean systems that are easy to use and built to grow."
     >
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <MotionStagger className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {servicePreviews.map((service, index) => (
-          <article
+          <MotionCard
             key={service.title}
-            className="group flex h-full flex-col rounded-lg border border-white/10 bg-white/[0.03] p-5 transition hover:-translate-y-1 hover:border-[#E6B8A2]/35 hover:bg-white/[0.05] sm:p-6"
+            className="interactive-card group flex h-full flex-col rounded-lg border border-white/10 bg-white/[0.03] p-5 hover:bg-white/[0.05] sm:p-6"
           >
             <div className="mb-5 flex items-center justify-between gap-4">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#A1A1AA]">
@@ -169,9 +174,9 @@ function ServicesPreview() {
                 </li>
               ))}
             </ul>
-          </article>
+          </MotionCard>
         ))}
-      </div>
+      </MotionStagger>
     </Section>
   );
 }
@@ -180,21 +185,22 @@ function PortfolioPreview() {
   return (
     <Section
       id="work"
+      className="section-soft-transition section-vertical-texture py-20 lg:py-32"
       eyebrow="Selected Work"
       title="Thoughtfully crafted websites for brands, creatives, and growing businesses."
       copy="A curated collection of completed work focused on thoughtful design, intuitive user experience, and real business impact."
     >
-      <div className="grid gap-5 lg:grid-cols-2">
+      <MotionStagger className="grid gap-5 lg:grid-cols-2">
         {portfolioProjects.map((project, index) => (
-          <article
+          <MotionCard
             key={project.title}
-            className="group overflow-hidden rounded-lg border border-white/10 bg-[#101011] transition hover:-translate-y-1 hover:border-[#E6B8A2]/35"
+            className="interactive-card group overflow-hidden rounded-lg border border-white/10 bg-[#101011]"
           >
             {project.href ? (
               <div className="relative border-b border-white/10 bg-[#0B0B0C] p-5">
                 <div className="absolute inset-0 rounded-md bg-[radial-gradient(circle_at_22%_10%,rgba(230,184,162,0.18),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.04),transparent_28%)]" />
-                <div className="relative isolate overflow-hidden rounded-md border border-white/10 bg-[#09090A] shadow-[0_18px_45px_rgba(0,0,0,0.35)] before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-white/[0.03]">
-                  <div className="relative overflow-hidden rounded-t-[inherit] border-b border-white/10 bg-[linear-gradient(180deg,rgba(26,26,28,0.98),rgba(15,15,17,0.95))] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.035),inset_0_-1px_0_rgba(0,0,0,0.35)] backdrop-blur-sm">
+                <div className="browser-preview-shell relative isolate overflow-hidden rounded-md border border-white/10 before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-white/[0.03]">
+                  <div className="browser-chrome relative overflow-hidden rounded-t-[inherit] border-b border-white/10 px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.035),inset_0_-1px_0_rgba(0,0,0,0.35)] backdrop-blur-sm">
                     <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1.5">
                       <span className="size-1.5 rounded-full bg-[#5A302A] transition group-hover:bg-[#C96B5A]" />
@@ -223,17 +229,30 @@ function PortfolioPreview() {
                       <span className="truncate font-mono">jw-xperience.com</span>
                     </a>
                     <div className="flex-1" />
-                    <a
+                    <MotionAnchor
                       href={project.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="shrink-0 rounded-full border border-[#E6B8A2]/15 bg-[#E6B8A2]/8 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#D9B19E] transition hover:border-[#E6B8A2]/24 hover:bg-[#E6B8A2]/11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
+                      className="interactive-button secondary-cta shrink-0 rounded-full border border-[#E6B8A2]/15 bg-[#E6B8A2]/8 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#D9B19E] hover:bg-[#E6B8A2]/11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
                     >
                       Live Site
-                    </a>
+                    </MotionAnchor>
                     </div>
                   </div>
-                  <div className="relative h-[336px] overflow-hidden border-t border-white/[0.03] bg-[#050506] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:h-[400px] lg:h-[500px]">
+                  <div className="browser-stage relative flex min-h-[280px] overflow-hidden border-t border-white/[0.03] p-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:hidden">
+                    <div className="relative z-10 mt-auto w-full rounded-md border border-white/10 bg-[#111113]/90 p-4 shadow-2xl shadow-black/30">
+                      <p className="text-xs uppercase tracking-[0.16em] text-[#A1A1AA]">
+                        {project.type}
+                      </p>
+                      <p className="mt-3 text-xl font-semibold text-[#F5F5F2]">
+                        {project.title}
+                      </p>
+                      <p className="mt-3 text-sm leading-6 text-[#BDBDB7]">
+                        {project.tone}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="browser-stage relative hidden h-[400px] overflow-hidden border-t border-white/[0.03] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:block lg:h-[500px]">
                     <iframe
                       src={project.href}
                       title={`${project.title} website preview`}
@@ -249,7 +268,7 @@ function PortfolioPreview() {
                       href={project.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="shrink-0 text-xs font-medium text-[#E6B8A2] transition hover:text-[#F1C8B8]"
+                      className="shrink-0 rounded-full px-2 py-1 text-xs font-medium text-[#E6B8A2] transition hover:bg-white/[0.045] hover:text-[#F1C8B8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
                     >
                       Open Site
                     </a>
@@ -308,19 +327,19 @@ function PortfolioPreview() {
                 ))}
               </div>
               {project.href ? (
-                <a
+                <MotionAnchor
                   href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex text-sm font-semibold text-[#E6B8A2] transition hover:text-[#F1C8B8]"
+                  className="interactive-button secondary-cta mt-6 inline-flex rounded-full border border-[#E6B8A2]/15 px-4 py-2 text-sm font-semibold text-[#E6B8A2] hover:bg-[#E6B8A2]/8 hover:text-[#F1C8B8]"
                 >
                   Visit Site
-                </a>
+                </MotionAnchor>
               ) : null}
             </div>
-          </article>
+          </MotionCard>
         ))}
-      </div>
+      </MotionStagger>
     </Section>
   );
 }
@@ -329,6 +348,7 @@ function ProcessSection() {
   return (
     <Section
       id="process"
+      className="relative border-y border-[#E6B8A2]/[0.06] bg-[#100F0E] py-28 sm:py-32 lg:py-40"
       eyebrow="Process"
       title="A clear path from concept and planning to confident launch."
       copy="The process keeps decisions clear, practical, and collaborative so the final site stays aligned with the goals of the business and the people behind it."
@@ -357,6 +377,7 @@ function PricingSection() {
   return (
     <Section
       id="pricing"
+      className="py-28 sm:py-32 lg:py-44"
       eyebrow="Project Investment"
       title="Custom websites, redesigns, and growth partnerships."
       copy="Treydmark Tech builds modern web solutions, migrations, and web platforms for businesses that need more than a generic drag-and-drop template. Every project is scoped around business goals, technical needs, and long-term direction."
@@ -370,26 +391,42 @@ function PricingSection() {
         </p>
       </div>
 
-      <PricingGroup
-        eyebrow="Main Build Tiers"
-        title="Modern custom builds for serious presentation and scalable growth."
-        items={mainBuildTiers}
-        columns="three"
-      />
+      <div className="mt-16 border-t border-white/10 pt-10">
+        <PricingSubsectionIntro
+          eyebrow="Project Work"
+          title="One-time builds, redesigns, and migrations."
+          copy="Custom React/Next.js work scoped around the level of polish, functionality, and infrastructure your business needs."
+        />
+        <PricingGroup
+          eyebrow="Main Build Tiers"
+          title="Modern custom builds for serious presentation and scalable growth."
+          items={mainBuildTiers}
+          columns="three"
+        />
 
-      <PricingGroup
-        eyebrow="Redesign / Modernization"
-        title="Upgrade an existing site into a stronger long-term foundation."
-        items={modernizationServices}
-        columns="two"
-      />
+        <PricingGroup
+          eyebrow="Redesign / Modernization"
+          title="Upgrade an existing site into a stronger long-term foundation."
+          items={modernizationServices}
+          columns="two"
+          isSecondary
+        />
+      </div>
 
-      <PricingGroup
-        eyebrow="Ongoing Care / Growth Plans"
-        title="Recurring support for infrastructure, optimization, and active iteration."
-        items={growthPlans}
-        columns="three"
-      />
+      <div className="mt-20 border-t border-[#E6B8A2]/20 pt-10">
+        <PricingSubsectionIntro
+          eyebrow="Ongoing Support"
+          title="Recurring support for managed infrastructure and growth."
+          copy="Care plans keep the site monitored, improved, and ready for new campaigns, content, and functionality after launch."
+        />
+        <PricingGroup
+          eyebrow="Care / Growth Plans"
+          title="Monthly partnership options for maintenance, optimization, and active iteration."
+          items={growthPlans}
+          columns="three"
+          isSecondary
+        />
+      </div>
     </Section>
   );
 }
@@ -408,46 +445,72 @@ function PricingGroup({
   title,
   items,
   columns,
+  isSecondary = false,
 }: {
   eyebrow: string;
   title: string;
   items: PricingItem[];
   columns: "two" | "three";
+  isSecondary?: boolean;
 }) {
   const gridClassName =
     columns === "two" ? "grid gap-5 lg:grid-cols-2" : "grid gap-5 lg:grid-cols-3";
 
   return (
-    <div className="mt-12">
+    <div className={isSecondary ? "mt-14" : "mt-8"}>
       <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#E6B8A2]">
             {eyebrow}
           </p>
-          <h3 className="mt-2 max-w-5xl text-2xl font-semibold leading-tight text-[#F5F5F2]">
+          <h3 className="mt-3 max-w-4xl text-2xl font-semibold leading-[1.08] text-[#F5F5F2] sm:text-3xl lg:leading-[1.03]">
             {title}
           </h3>
         </div>
       </div>
-      <div className={gridClassName}>
+      <MotionStagger className={gridClassName}>
         {items.map((item) => (
           <PricingCard key={item.name} item={item} />
         ))}
-      </div>
+      </MotionStagger>
+    </div>
+  );
+}
+
+function PricingSubsectionIntro({
+  eyebrow,
+  title,
+  copy,
+}: {
+  eyebrow: string;
+  title: string;
+  copy: string;
+}) {
+  return (
+    <div className="max-w-3xl">
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#E6B8A2]">
+        {eyebrow}
+      </p>
+      <h3 className="mt-3 text-3xl font-semibold leading-[1.07] text-[#F5F5F2] sm:text-4xl lg:leading-[1.02]">
+        {title}
+      </h3>
+      <p className="mt-4 max-w-2xl text-base leading-8 text-[#BDBDB7]">{copy}</p>
     </div>
   );
 }
 
 function PricingCard({ item }: { item: PricingItem }) {
+  const visibleFeatures = item.features.slice(0, 5);
+
   return (
-    <article className="flex h-full flex-col rounded-lg border border-white/10 bg-[#101011] p-6 transition hover:-translate-y-1 hover:border-[#E6B8A2]/35 hover:bg-white/[0.045]">
+    <MotionCard className="interactive-card flex h-full flex-col rounded-lg border border-white/10 bg-[#101011] p-6 hover:bg-white/[0.045] sm:p-7">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#A1A1AA]">
         {item.bestFor ? "Best For" : "Good For"}
       </p>
-      <p className="mt-3 min-h-16 text-sm leading-6 text-[#C9C9C3]">
+      <p className="mt-3 text-sm leading-6 text-[#C9C9C3]">
         {item.bestFor || item.goodFor}
       </p>
-      <div className="mt-6 border-t border-white/10 pt-6">
+      <div className="mt-7 border-t border-white/10 pt-6">
         <h4 className="text-2xl font-semibold text-[#F5F5F2]">{item.name}</h4>
         <p className="mt-3 text-3xl font-semibold text-[#E6B8A2]">
           {item.startingAt}
@@ -456,37 +519,15 @@ function PricingCard({ item }: { item: PricingItem }) {
           {item.positioning}
         </p>
       </div>
-      <ul className="mt-6 grid gap-3">
-        {item.features.map((feature) => (
+      <ul className="mt-6 grid gap-2.5">
+        {visibleFeatures.map((feature) => (
           <li key={feature} className="flex gap-3 text-sm leading-6 text-[#D7D7D1]">
             <span className="mt-2 h-px w-4 shrink-0 bg-[#E6B8A2]" />
             <span>{feature}</span>
           </li>
         ))}
       </ul>
-    </article>
-  );
-}
-
-function ServicesDetail() {
-  return (
-    <Section
-      id="service-detail"
-      eyebrow="Service Depth"
-      title="Capabilities that support the full digital foundation."
-      copy="A stronger site often needs more than pages. These are the systems and support layers Treydmark Tech can connect around the core build."
-    >
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {detailedServices.map((service) => (
-          <div
-            key={service}
-            className="rounded-lg border border-white/10 bg-white/[0.03] p-5 text-base font-medium text-[#F5F5F2]"
-          >
-            {service}
-          </div>
-        ))}
-      </div>
-    </Section>
+    </MotionCard>
   );
 }
 
@@ -494,6 +535,7 @@ function AboutSection() {
   return (
     <Section
       id="about"
+      className="section-soft-transition section-vertical-texture py-20 lg:py-32"
       eyebrow="About"
       title="Founder-led work with product-level technical standards."
       copy="Treydmark Tech is a high-quality web solution studio founded and led by Trey Bryant, combining software engineering, design judgment, and practical business strategy."
@@ -515,7 +557,7 @@ function AboutSection() {
           <h3 className="text-2xl font-semibold text-[#F5F5F2]">
             I&apos;m Trey, the founder of Treydmark Tech.
           </h3>
-          <p className="mt-5 text-base leading-8 text-[#C9C9C3]">
+          <p className="mt-5 max-w-2xl text-base leading-8 text-[#C9C9C3]">
             My focus is building websites that feel polished, perform well,
             and communicate clearly. Having a background in software engineering and
             product development allows me to approach projects from both the
@@ -537,7 +579,7 @@ function AboutSection() {
               <ul className="mt-4 space-y-3">
                 {whatGoesIntoTheWork.map((item) => (
                   <li key={item} className="group flex items-start gap-3 text-sm leading-6 text-[#BDBDB7]">
-                    <span className="mt-1.5 inline-flex size-5 shrink-0 items-center justify-center text-[#E6B8A2] transition group-hover:rotate-45" aria-hidden="true">
+                    <span className="mt-1.5 inline-flex size-5 shrink-0 items-center justify-center text-[#E6B8A2]" aria-hidden="true">
                       <svg
                         viewBox="0 0 24 24"
                         className="size-5 drop-shadow-[0_0_8px_rgba(230,184,162,0.22)]"
@@ -573,7 +615,7 @@ function AboutSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Open Trey Bryant resume PDF"
-                className="group mt-4 block rounded-lg border border-white/10 bg-[#0F0F10] p-3 shadow-[0_18px_55px_rgba(0,0,0,0.22)] transition hover:border-[#E6B8A2]/35 hover:bg-white/[0.045]"
+                className="interactive-card group mt-4 block rounded-lg border border-white/10 bg-[#0F0F10] p-3 shadow-[0_18px_55px_rgba(0,0,0,0.22)] hover:bg-white/[0.045]"
               >
                 <div className="space-y-3">
                   <div className="relative aspect-[1275/1651] overflow-hidden rounded-md border border-[#E6B8A2]/20 bg-[#151516] shadow-[0_22px_48px_rgba(0,0,0,0.38)] after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_center,transparent_58%,rgba(0,0,0,0.24))]">
@@ -606,22 +648,22 @@ function AboutSection() {
 
 function ContactSection() {
   return (
-    <section id="contact" className="relative overflow-hidden px-5 py-20 sm:px-8 lg:px-10 lg:py-28">
-      <div className="absolute right-0 top-0 -z-10 h-96 w-96 translate-x-1/3 rounded-full bg-[#E6B8A2]/10 blur-3xl" />
+    <section id="contact" className="relative scroll-mt-24 overflow-hidden border-t border-white/[0.06] px-5 py-24 sm:px-8 sm:py-28 lg:px-10 lg:py-40">
+      <div className="absolute left-1/2 top-0 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#E6B8A2]/10 blur-3xl sm:left-auto sm:right-0 sm:h-96 sm:w-96 sm:translate-x-1/3" />
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-        <div className="max-w-4xl">
+        <MotionReveal className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E6B8A2]">
             Start a project
           </p>
-          <h2 className="mt-4 text-4xl font-semibold leading-[1.08] text-[#F5F5F2] sm:text-5xl">
+          <h2 className="mt-4 text-[2.15rem] font-semibold leading-[1.06] text-[#F5F5F2] sm:text-5xl lg:leading-[1.02]">
             Ready to modernize your online presence?
           </h2>
-          <p className="mt-5 text-base leading-8 text-[#C9C9C3]">
+          <p className="mt-5 max-w-2xl text-base leading-8 text-[#C9C9C3]">
             Tell me where your business is now and where you want your online
             presence to go. The first conversation is about fit, scope, and the
             clearest next move.
           </p>
-        </div>
+        </MotionReveal>
         <ContactForm />
       </div>
     </section>
@@ -634,25 +676,27 @@ function Section({
   title,
   copy,
   children,
+  className = "py-20 lg:py-32",
 }: {
   id: string;
   eyebrow: string;
   title: string;
   copy: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <section id={id} className="px-5 py-20 sm:px-8 lg:px-10 lg:py-32">
+    <section id={id} className={`scroll-mt-24 px-5 sm:px-8 lg:px-10 ${className}`}>
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 max-w-3xl">
+        <MotionReveal className="mb-12 max-w-[46rem]">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#E6B8A2]">
             {eyebrow}
           </p>
-          <h2 className="mt-4 text-4xl font-semibold leading-[1.08] text-[#F5F5F2] sm:text-5xl">
+          <h2 className="mt-4 text-[2.15rem] font-semibold leading-[1.06] text-[#F5F5F2] sm:text-5xl lg:leading-[1.02]">
             {title}
           </h2>
-          <p className="mt-5 text-base leading-8 text-[#C9C9C3]">{copy}</p>
-        </div>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-[#C9C9C3]">{copy}</p>
+        </MotionReveal>
         {children}
       </div>
     </section>
