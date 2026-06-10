@@ -88,28 +88,14 @@ export const portfolioProjects = [
     href: "https://www.jw-xperience.com/",
   },
   {
-    title: "Local Service Business Redesign",
-    type: "Website Redesign",
+    title: "Luxe Realty Photography",
+    type: "Luxury Photography Website • Major Redesign",
     summary:
-      "An outdated local business site reframed around trust, clear services, stronger mobile flow, and lead capture.",
-    tags: ["SEO", "Copy Structure", "Mobile UX"],
-    tone: "Credibility, speed, leads",
-  },
-  {
-    title: "Ecommerce Concept",
-    type: "Commerce experience",
-    summary:
-      "A premium storefront direction built for clean product discovery, sharp category pages, and checkout-focused conversion paths.",
-    tags: ["Ecommerce", "Design System", "Analytics"],
-    tone: "Catalog, conversion, polish",
-  },
-  {
-    title: "Custom Dashboard/Platform",
-    type: "Advanced web platform",
-    summary:
-      "A business operations concept with secure user flows, data views, and repeatable workflows that replace spreadsheet-heavy processes.",
-    tags: ["Dashboard", "Database", "Custom Workflow"],
-    tone: "Systems, clarity, control",
+      "A premium real estate photography redesign focused on elevated listing presentation, service clarity, recent work, and stronger booking intent.",
+    tags: ["Real Estate Media", "Gallery UX", "Booking Flow"],
+    tone: "Listings • Services • Booking",
+    href: "https://luxe-realty-photography-website.vercel.app/",
+    previewHref: "https://luxe-realty-photography-website.vercel.app/southern-arizona",
   },
 ];
 

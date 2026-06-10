@@ -226,7 +226,7 @@ function PortfolioPreview() {
                         <rect x="5" y="11" width="14" height="9" rx="2" />
                         <path d="M8 11V8a4 4 0 1 1 8 0v3" />
                       </svg>
-                      <span className="truncate font-mono">jw-xperience.com</span>
+                      <span className="truncate font-mono">{getProjectHost(project.href)}</span>
                     </a>
                     <div className="flex-1" />
                     <MotionAnchor
@@ -254,7 +254,7 @@ function PortfolioPreview() {
                   </div>
                   <div className="browser-stage relative hidden h-[400px] overflow-hidden border-t border-white/[0.03] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:block lg:h-[500px]">
                     <iframe
-                      src={project.href}
+                      src={project.previewHref || project.href}
                       title={`${project.title} website preview`}
                       className="h-full w-full border-0 bg-white"
                       loading="lazy"
@@ -344,6 +344,14 @@ function PortfolioPreview() {
   );
 }
 
+function getProjectHost(href: string) {
+  try {
+    return new URL(href).hostname.replace(/^www[.]/, "");
+  } catch {
+    return href;
+  }
+}
+
 function ProcessSection() {
   return (
     <Section
@@ -392,11 +400,6 @@ function PricingSection() {
       </div>
 
       <div className="mt-16 border-t border-white/10 pt-10">
-        <PricingSubsectionIntro
-          eyebrow="Project Work"
-          title="One-time builds, redesigns, and migrations."
-          copy="Custom React/Next.js work scoped around the level of polish, functionality, and infrastructure your business needs."
-        />
         <PricingGroup
           eyebrow="Main Build Tiers"
           title="Modern custom builds for serious presentation and scalable growth."
