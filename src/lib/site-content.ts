@@ -93,7 +93,7 @@ export const portfolioProjects = [
     summary:
       "A premium real estate photography redesign focused on elevated listing presentation, service clarity, recent work, and stronger booking intent.",
     tags: ["Real Estate Media", "Gallery UX", "Booking Flow"],
-    tone: "Listings • Services • Booking",
+    tone: "Animation • Services • Client Conversion",
     href: "https://luxe-realty-photography-website.vercel.app/",
     previewHref: "https://luxe-realty-photography-website.vercel.app/southern-arizona",
   },
