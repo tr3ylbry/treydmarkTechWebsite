@@ -625,8 +625,8 @@ function CustomSelectField({
           onKeyDown={handleListboxKeyDown}
           ref={listboxRef}
           style={listboxStyle}
-          className={`fixed z-[70] overflow-y-auto overscroll-contain rounded-md border border-white/10 bg-[#111113] p-1 shadow-[0_20px_52px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.07)] ${
-            hasOverflow ? "custom-dropdown-scroll pr-2" : ""
+          className={`custom-dropdown-scroll fixed z-[70] overflow-y-auto overscroll-contain rounded-md border border-white/10 bg-[#111113] p-1 shadow-[0_20px_52px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.07)] ${
+            hasOverflow ? "pr-2" : ""
           }`}
         >
           {options.map((option, index) => {
