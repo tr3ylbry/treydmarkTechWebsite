@@ -79,23 +79,22 @@ export const servicePreviews = [
 
 export const portfolioProjects = [
   {
-    title: "JW XPERIENCE",
-    type: "Artist Website • New Build",
+    title: "Sell With Casey James",
+    type: "Real Estate Website • Lead Generation",
     summary:
-      "A polished artist website built to showcase music, visuals, performance energy, and booking flows with an immersive creative presence.",
-    tags: ["Musical & Visual Showcase", "Artist Branding", "Content Driven"],
-    tone: "Media • Identity • Booking",
-    href: "https://www.jw-xperience.com/",
+      "A polished real estate website structured around agent credibility, local market confidence, property guidance, and a clear path for prospective sellers to connect.",
+    tags: ["Real Estate", "Lead Capture", "Responsive Design"],
+    tone: "Trust • Listings • Seller Leads",
+    href: "https://sellwithcaseyjames.com/",
   },
   {
-    title: "Luxe Realty Photography",
-    type: "Luxury Photography Website • Major Redesign",
+    title: "Jorge Pensky Tennis Academy",
+    type: "Academy Website • Program Presence",
     summary:
-      "A premium real estate photography redesign focused on elevated listing presentation, service clarity, recent work, and stronger booking intent.",
-    tags: ["Real Estate Media", "Gallery UX", "Booking Flow"],
-    tone: "Animation • Services • Client Conversion",
-    href: "https://luxe-realty-photography-website.vercel.app/",
-    previewHref: "https://luxe-realty-photography-website.vercel.app/southern-arizona",
+      "A focused tennis academy website built to present coaching programs, instructor credibility, training opportunities, and a direct path for students and parents to inquire.",
+    tags: ["Sports Academy", "Program UX", "Inquiry Flow"],
+    tone: "Coaching • Programs • Enrollment",
+    href: "https://jorgepenskytennisacademy.com/",
   },
 ];
 

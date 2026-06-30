@@ -254,7 +254,7 @@ function PortfolioPreview() {
                   </div>
                   <div className="browser-stage relative hidden h-[400px] overflow-hidden border-t border-white/[0.03] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:block lg:h-[500px]">
                     <iframe
-                      src={project.previewHref || project.href}
+                      src={getProjectPreviewHref(project)}
                       title={`${project.title} website preview`}
                       className="h-full w-full border-0 bg-white"
                       loading="lazy"
@@ -342,6 +342,10 @@ function PortfolioPreview() {
       </MotionStagger>
     </Section>
   );
+}
+
+function getProjectPreviewHref(project: { href: string; previewHref?: string }) {
+  return project.previewHref || project.href;
 }
 
 function getProjectHost(href: string) {
