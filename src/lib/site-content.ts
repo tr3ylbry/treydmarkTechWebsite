@@ -86,6 +86,9 @@ export const portfolioProjects = [
     tags: ["Real Estate", "Lead Capture", "Responsive Design"],
     tone: "Trust • Listings • Seller Leads",
     href: "https://sellwithcaseyjames.com/",
+    liveUrl: "https://sellwithcaseyjames.com/",
+    iframeUrl: "https://sellwithcaseyjames.com/",
+    mobilePreviewImage: "/portfolio/sell-with-casey-james-mobile-preview.jpg",
   },
   {
     title: "Jorge Pensky Tennis Academy",
@@ -95,6 +98,9 @@ export const portfolioProjects = [
     tags: ["Sports Academy", "Program UX", "Inquiry Flow"],
     tone: "Coaching • Programs • Enrollment",
     href: "https://jorgepenskytennisacademy.com/",
+    liveUrl: "https://jorgepenskytennisacademy.com/",
+    iframeUrl: "https://jorgepenskytennisacademy.com/",
+    mobilePreviewImage: "/portfolio/jorge-pensky-tennis-academy-mobile-preview.jpg",
   },
 ];
 

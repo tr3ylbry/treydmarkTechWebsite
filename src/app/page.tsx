@@ -338,40 +338,58 @@ function MobilePortfolioFallback({
   project: (typeof portfolioProjects)[number];
 }) {
   return (
-    <div className="browser-stage relative flex min-h-[320px] overflow-hidden border-t border-white/[0.03] p-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:hidden">
-      <div className="absolute inset-x-5 top-5 rounded-md border border-white/10 bg-[#0B0B0C]/78 p-3 shadow-[0_18px_42px_rgba(0,0,0,0.24)]">
-        <div className="h-2.5 w-28 rounded-full bg-[#E6B8A2]/65" />
-        <div className="mt-4 space-y-2.5">
-          <div className="h-2 rounded-full bg-white/24" />
-          <div className="h-2 w-4/5 rounded-full bg-white/16" />
-          <div className="h-2 w-2/3 rounded-full bg-white/10" />
+    <div className="browser-stage relative overflow-hidden border-t border-white/[0.03] p-4 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:hidden">
+      <div className="relative overflow-hidden rounded-md border border-white/10 bg-[#080809] shadow-[0_18px_44px_rgba(0,0,0,0.28)]">
+        <div className="flex items-center gap-2 border-b border-white/10 bg-[#111113]/95 px-3 py-2.5">
+          <div className="flex gap-1.5">
+            <span className="size-1.5 rounded-full bg-[#C96B5A]" />
+            <span className="size-1.5 rounded-full bg-[#D6AE59]" />
+            <span className="size-1.5 rounded-full bg-[#55B46D]" />
+          </div>
+          <div className="ml-2 min-w-0 flex-1 rounded-full border border-white/8 bg-[#0B0B0C] px-3 py-1.5">
+            <p className="truncate font-mono text-[10px] text-[#8E8E89]">
+              {getProjectHost(project.href)}
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="relative z-10 mt-auto w-full rounded-md border border-white/10 bg-[#111113]/92 p-4 shadow-2xl shadow-black/30">
-        <p className="text-xs uppercase tracking-[0.16em] text-[#A1A1AA]">
-          Mobile Preview
-        </p>
-        <p className="mt-3 text-xl font-semibold text-[#F5F5F2]">
-          {project.title}
-        </p>
-        <p className="mt-3 text-sm leading-6 text-[#BDBDB7]">
-          Live previews open best in a new tab on phones.
-        </p>
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="interactive-button secondary-cta mt-5 inline-flex rounded-full border border-[#E6B8A2]/15 px-4 py-2 text-sm font-semibold text-[#E6B8A2] hover:bg-[#E6B8A2]/8 hover:text-[#F1C8B8]"
-        >
-          Open Live Site
-        </a>
+        <div className="relative aspect-[9/12] overflow-hidden bg-[#050506]">
+          <Image
+            src={getProjectMobilePreviewImage(project)}
+            alt={` mobile website preview`}
+            fill
+            sizes="(max-width: 639px) 90vw, 0px"
+            className="object-cover object-top"
+          />
+          <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.035),inset_0_-28px_40px_rgba(0,0,0,0.18)]" />
+        </div>
+        <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-[#0F0F10] px-3 py-3">
+          <p className="text-xs leading-5 text-[#8F8F89]">
+            Preview optimized for mobile.
+          </p>
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 rounded-full px-2 py-1 text-xs font-medium text-[#E6B8A2] transition hover:bg-white/[0.045] hover:text-[#F1C8B8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
+          >
+            Open Live Site
+          </a>
+        </div>
       </div>
     </div>
   );
 }
 
-function getProjectPreviewHref(project: { href: string; previewHref?: string }) {
-  return project.previewHref || project.href;
+function getProjectPreviewHref(project: {
+  href: string;
+  iframeUrl?: string;
+  previewHref?: string;
+}) {
+  return project.iframeUrl || project.previewHref || project.href;
+}
+
+function getProjectMobilePreviewImage(project: { mobilePreviewImage: string }) {
+  return project.mobilePreviewImage;
 }
 
 function getProjectHost(href: string) {
