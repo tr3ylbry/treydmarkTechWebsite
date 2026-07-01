@@ -239,19 +239,7 @@ function PortfolioPreview() {
                     </MotionAnchor>
                     </div>
                   </div>
-                  <div className="browser-stage relative flex min-h-[280px] overflow-hidden border-t border-white/[0.03] p-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:hidden">
-                    <div className="relative z-10 mt-auto w-full rounded-md border border-white/10 bg-[#111113]/90 p-4 shadow-2xl shadow-black/30">
-                      <p className="text-xs uppercase tracking-[0.16em] text-[#A1A1AA]">
-                        {project.type}
-                      </p>
-                      <p className="mt-3 text-xl font-semibold text-[#F5F5F2]">
-                        {project.title}
-                      </p>
-                      <p className="mt-3 text-sm leading-6 text-[#BDBDB7]">
-                        {project.tone}
-                      </p>
-                    </div>
-                  </div>
+                  <MobilePortfolioFallback project={project} />
                   <div className="browser-stage relative hidden h-[400px] overflow-hidden border-t border-white/[0.03] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:block lg:h-[500px]">
                     <iframe
                       src={getProjectPreviewHref(project)}
@@ -341,6 +329,44 @@ function PortfolioPreview() {
         ))}
       </MotionStagger>
     </Section>
+  );
+}
+
+function MobilePortfolioFallback({
+  project,
+}: {
+  project: (typeof portfolioProjects)[number];
+}) {
+  return (
+    <div className="browser-stage relative flex min-h-[320px] overflow-hidden border-t border-white/[0.03] p-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:hidden">
+      <div className="absolute inset-x-5 top-5 rounded-md border border-white/10 bg-[#0B0B0C]/78 p-3 shadow-[0_18px_42px_rgba(0,0,0,0.24)]">
+        <div className="h-2.5 w-28 rounded-full bg-[#E6B8A2]/65" />
+        <div className="mt-4 space-y-2.5">
+          <div className="h-2 rounded-full bg-white/24" />
+          <div className="h-2 w-4/5 rounded-full bg-white/16" />
+          <div className="h-2 w-2/3 rounded-full bg-white/10" />
+        </div>
+      </div>
+      <div className="relative z-10 mt-auto w-full rounded-md border border-white/10 bg-[#111113]/92 p-4 shadow-2xl shadow-black/30">
+        <p className="text-xs uppercase tracking-[0.16em] text-[#A1A1AA]">
+          Mobile Preview
+        </p>
+        <p className="mt-3 text-xl font-semibold text-[#F5F5F2]">
+          {project.title}
+        </p>
+        <p className="mt-3 text-sm leading-6 text-[#BDBDB7]">
+          Live previews open best in a new tab on phones.
+        </p>
+        <a
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="interactive-button secondary-cta mt-5 inline-flex rounded-full border border-[#E6B8A2]/15 px-4 py-2 text-sm font-semibold text-[#E6B8A2] hover:bg-[#E6B8A2]/8 hover:text-[#F1C8B8]"
+        >
+          Open Live Site
+        </a>
+      </div>
+    </div>
   );
 }
 

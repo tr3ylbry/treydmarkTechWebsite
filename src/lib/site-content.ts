@@ -130,7 +130,7 @@ export const mainBuildTiers = [
     name: "Starter Site",
     startingAt: "Starting at $2,000",
     bestFor:
-      "Local businesses, musicians, artists, photographers, contractors, restaurants, solo professionals, and startups that need a polished web presence.",
+      "Local businesses, contractors, restaurants, solo professionals, artists and startups that need a polished web presence.",
     positioning:
       "A professionally designed custom website built for trust, presentation quality, responsive UX, and a stronger first impression.",
     features: [

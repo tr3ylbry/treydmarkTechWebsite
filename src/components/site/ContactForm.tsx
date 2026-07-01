@@ -121,7 +121,7 @@ export function ContactForm() {
       setFieldErrors({});
       setResetToken((current) => current + 1);
       setSubmitSuccess(
-        "Inquiry sent. I will review the details and follow up from the reply-to email you provided."
+        "Inquiry sent. I will review the details and follow up via the phone number or email you provided."
       );
     } catch {
       setSubmitError(genericSubmitError);
