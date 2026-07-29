@@ -79,8 +79,22 @@ export const servicePreviews = [
 
 export const portfolioProjects = [
   {
+    title: "Luxe Realty Photography",
+    type: "Real Estate Media Website • Major Redesign",
+    summary:
+      "A multi-market website redesign that organizes premium photography, video, drone, and listing presentation services into a polished experience built for stronger brand perception and easier client conversion.",
+    tags: ["Major Redesign", "Multi-Market UX", "Booking Flow"],
+    tone: "Luxury • Media • Conversion",
+    href: "https://luxerealtyphotography.com/",
+    liveUrl: "https://luxerealtyphotography.com/",
+    iframeUrl: "https://luxerealtyphotography.com/southern-arizona",
+    mobilePreviewImage:
+      "/portfolio/luxe-realty-photography-mobile-preview.jpg",
+    featured: true,
+  },
+  {
     title: "Sell With Casey James",
-    type: "Real Estate Website • Lead Generation",
+    type: "Real Estate Website • Starter Site",
     summary:
       "A polished real estate website structured around agent credibility, local market confidence, property guidance, and a clear path for prospective sellers to connect.",
     tags: ["Real Estate", "Lead Capture", "Responsive Design"],
@@ -89,10 +103,11 @@ export const portfolioProjects = [
     liveUrl: "https://sellwithcaseyjames.com/",
     iframeUrl: "https://sellwithcaseyjames.com/",
     mobilePreviewImage: "/portfolio/sell-with-casey-james-mobile-preview.jpg",
+    featured: false,
   },
   {
     title: "Jorge Pensky Tennis Academy",
-    type: "Academy Website • Program Presence",
+    type: "Academy Website • Growth Website",
     summary:
       "A focused tennis academy website built to present coaching programs, instructor credibility, training opportunities, and a direct path for students and parents to inquire.",
     tags: ["Sports Academy", "Program UX", "Inquiry Flow"],
@@ -101,6 +116,7 @@ export const portfolioProjects = [
     liveUrl: "https://jorgepenskytennisacademy.com/",
     iframeUrl: "https://jorgepenskytennisacademy.com/",
     mobilePreviewImage: "/portfolio/jorge-pensky-tennis-academy-mobile-preview.jpg",
+    featured: false,
   },
 ];
 

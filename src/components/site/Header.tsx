@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from "react";
+
 import { navItems } from "@/lib/site-content";
 
 export function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0B0B0C]/88 shadow-[0_1px_0_rgba(255,255,255,0.025),0_14px_42px_rgba(0,0,0,0.24)] backdrop-blur-xl">
       <nav
@@ -40,32 +46,55 @@ export function Header() {
           Start a Project
         </a>
 
-        <details className="group relative lg:hidden">
-          <summary className="interactive-button flex size-11 cursor-pointer list-none items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-[#F5F5F2]">
-            <span className="sr-only">Open navigation menu</span>
-            <span className="relative h-3.5 w-5">
-              <span className="absolute left-0 top-0 h-px w-5 bg-current transition group-open:top-1.5 group-open:rotate-45" />
-              <span className="absolute bottom-0 left-0 h-px w-5 bg-current transition group-open:bottom-2 group-open:-rotate-45" />
+        <div className="relative lg:hidden">
+          <button
+            type="button"
+            aria-controls="mobile-navigation-menu"
+            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+            className="interactive-button flex size-11 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-[#F5F5F2]"
+          >
+            <span className="sr-only">
+              {isMobileMenuOpen ? "Close" : "Open"} navigation menu
             </span>
-          </summary>
-          <div className="absolute right-0 mt-4 w-64 rounded-lg border border-white/10 bg-[#111113] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.055)]">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="block rounded-md px-3 py-3 text-sm text-[#D9D9D6] transition hover:bg-white/[0.04] hover:text-[#F5F5F2]"
-              >
-                {item.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              className="interactive-button mt-2 flex items-center justify-center rounded-md bg-[#E6B8A2] px-4 py-3 text-sm font-semibold text-[#0B0B0C] hover:bg-[#F1C8B8]"
+            <span className="relative h-3.5 w-5">
+              <span
+                className={`absolute left-0 h-px w-5 bg-current transition ${
+                  isMobileMenuOpen ? "top-1.5 rotate-45" : "top-0"
+                }`}
+              />
+              <span
+                className={`absolute left-0 h-px w-5 bg-current transition ${
+                  isMobileMenuOpen ? "bottom-2 -rotate-45" : "bottom-0"
+                }`}
+              />
+            </span>
+          </button>
+          {isMobileMenuOpen ? (
+            <div
+              id="mobile-navigation-menu"
+              className="absolute right-0 mt-4 w-64 rounded-lg border border-white/10 bg-[#111113] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.055)]"
             >
-              Start a Project
-            </a>
-          </div>
-        </details>
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block rounded-md px-3 py-3 text-sm text-[#D9D9D6] transition hover:bg-white/[0.04] hover:text-[#F5F5F2]"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="interactive-button mt-2 flex items-center justify-center rounded-md bg-[#E6B8A2] px-4 py-3 text-sm font-semibold text-[#0B0B0C] hover:bg-[#F1C8B8]"
+              >
+                Start a Project
+              </a>
+            </div>
+          ) : null}
+        </div>
       </nav>
     </header>
   );

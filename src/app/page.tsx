@@ -194,7 +194,9 @@ function PortfolioPreview() {
         {portfolioProjects.map((project, index) => (
           <MotionCard
             key={project.title}
-            className="interactive-card group overflow-hidden rounded-lg border border-white/10 bg-[#101011]"
+            className={`interactive-card group overflow-hidden rounded-lg border border-white/10 bg-[#101011] ${
+              project.featured ? "lg:col-span-2" : ""
+            }`}
           >
             {project.href ? (
               <div className="relative border-b border-white/10 bg-[#0B0B0C] p-5">
@@ -355,7 +357,7 @@ function MobilePortfolioFallback({
         <div className="relative aspect-[9/12] overflow-hidden bg-[#050506]">
           <Image
             src={getProjectMobilePreviewImage(project)}
-            alt={` mobile website preview`}
+            alt={`${project.title} mobile website preview`}
             fill
             sizes="(max-width: 639px) 90vw, 0px"
             className="object-cover object-top"
