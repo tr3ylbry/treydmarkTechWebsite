@@ -100,12 +100,12 @@ function HeroVisual() {
             </div>
             <div className="mt-7 grid grid-cols-2 gap-3">
               <div className="rounded-md border border-[#E6B8A2]/20 bg-[#E6B8A2]/10 p-3">
-                <p className="font-mono text-2xl text-[#F5F5F2]">38%</p>
-                <p className="mt-1 text-xs text-[#A1A1AA]">Lead clarity</p>
+                <p className="font-mono text-xl text-[#F5F5F2]">Clear</p>
+                <p className="mt-1 text-xs text-[#A1A1AA]">Inquiry path</p>
               </div>
               <div className="rounded-md border border-white/10 bg-white/[0.03] p-3">
-                <p className="font-mono text-2xl text-[#F5F5F2]">A+</p>
-                <p className="mt-1 text-xs text-[#A1A1AA]">Structure</p>
+                <p className="font-mono text-xl text-[#F5F5F2]">Modular</p>
+                <p className="mt-1 text-xs text-[#A1A1AA]">Page structure</p>
               </div>
             </div>
           </div>
@@ -146,7 +146,7 @@ function ServicesPreview() {
       className="section-soft-transition section-vertical-texture pt-24 pb-28 sm:pt-28 sm:pb-32 lg:pt-36 lg:pb-40"
       eyebrow="Services"
       title="Practical web systems built for real business needs."
-      copy="From business websites to booking flows, ecommerce, and internal tools, the work is shaped into clean systems that are easy to use and built to grow."
+      copy="Websites, booking flows, ecommerce, and internal tools shaped around how the business actually operates."
     >
       <MotionStagger className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {servicePreviews.map((service, index) => (
@@ -168,9 +168,15 @@ function ServicesPreview() {
             </p>
             <ul className="mt-5 grid gap-2.5 border-t border-white/10 pt-5">
               {service.features.map((feature) => (
-                <li key={feature} className="flex gap-3 text-sm leading-6 text-[#D7D7D1]">
-                  <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-[#E6B8A2]" />
-                  <span>{feature}</span>
+                <li
+                  key={feature}
+                  className="flex items-center gap-3 text-sm leading-6 text-[#D7D7D1]"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="size-1.5 shrink-0 rounded-full bg-[#E6B8A2]"
+                  />
+                  <span className="min-w-0">{feature}</span>
                 </li>
               ))}
             </ul>
@@ -187,8 +193,8 @@ function PortfolioPreview() {
       id="work"
       className="section-soft-transition section-vertical-texture py-20 lg:py-32"
       eyebrow="Selected Work"
-      title="Thoughtfully crafted websites for brands, creatives, and growing businesses."
-      copy="A curated collection of completed work focused on thoughtful design, intuitive user experience, and real business impact."
+      title="Thoughtfully designed websites for brands, creatives, and growing businesses."
+      copy="Selected work across real estate, media, creative, and service-focused brands."
     >
       <MotionStagger className="grid gap-5 lg:grid-cols-2">
         {portfolioProjects.map((project, index) => (
@@ -237,7 +243,7 @@ function PortfolioPreview() {
                       rel="noopener noreferrer"
                       className="interactive-button secondary-cta shrink-0 rounded-full border border-[#E6B8A2]/15 bg-[#E6B8A2]/8 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#D9B19E] hover:bg-[#E6B8A2]/11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
                     >
-                      Live Site
+                      View Live Site
                     </MotionAnchor>
                     </div>
                   </div>
@@ -252,7 +258,7 @@ function PortfolioPreview() {
                   </div>
                   <div className="relative overflow-hidden rounded-b-[inherit] flex items-center justify-between gap-3 border-t border-white/10 bg-[#0F0F10] px-4 py-3">
                     <p className="text-xs leading-5 text-[#8F8F89]">
-                      If this preview does not load on your device, open the site in a new tab.
+                      Preview unavailable? View the live site.
                     </p>
                     <a
                       href={project.href}
@@ -260,7 +266,7 @@ function PortfolioPreview() {
                       rel="noopener noreferrer"
                       className="shrink-0 rounded-full px-2 py-1 text-xs font-medium text-[#E6B8A2] transition hover:bg-white/[0.045] hover:text-[#F1C8B8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
                     >
-                      Open Site
+                      View Live Site
                     </a>
                   </div>
                 </div>
@@ -323,7 +329,7 @@ function PortfolioPreview() {
                   rel="noopener noreferrer"
                   className="interactive-button secondary-cta mt-6 inline-flex rounded-full border border-[#E6B8A2]/15 px-4 py-2 text-sm font-semibold text-[#E6B8A2] hover:bg-[#E6B8A2]/8 hover:text-[#F1C8B8]"
                 >
-                  Visit Site
+                  View Live Site
                 </MotionAnchor>
               ) : null}
             </div>
@@ -374,7 +380,7 @@ function MobilePortfolioFallback({
             rel="noopener noreferrer"
             className="shrink-0 rounded-full px-2 py-1 text-xs font-medium text-[#E6B8A2] transition hover:bg-white/[0.045] hover:text-[#F1C8B8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E6B8A2]/45 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111113]"
           >
-            Open Live Site
+            View Live Site
           </a>
         </div>
       </div>
@@ -408,8 +414,8 @@ function ProcessSection() {
       id="process"
       className="relative border-y border-[#E6B8A2]/[0.06] bg-[#100F0E] py-28 sm:py-32 lg:py-40"
       eyebrow="Process"
-      title="A clear path from concept and planning to confident launch."
-      copy="The process keeps decisions clear, practical, and collaborative so the final site stays aligned with the goals of the business and the people behind it."
+      title="A clear path from first conversation to launch."
+      copy="Four stages keep scope, decisions, and delivery focused."
     >
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {processSteps.map((item) => (
@@ -437,29 +443,20 @@ function PricingSection() {
       id="pricing"
       className="py-28 sm:py-32 lg:py-44"
       eyebrow="Project Investment"
-      title="Custom websites, redesigns, and growth partnerships."
-      copy="Treydmark Tech builds modern web solutions, migrations, and web platforms for businesses that need more than a generic drag-and-drop template. Every project is scoped around business goals, technical needs, and long-term direction."
+      title="Investment shaped by scope, not templates."
+      copy="Projects are scoped around goals, content, integrations, and technical complexity. Larger or specialized builds receive a tailored quote."
     >
-      <div className="rounded-lg border border-[#E6B8A2]/20 bg-[#E6B8A2]/8 p-5 sm:p-6">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#E6B8A2]">
-          NOTE ON PRICING
-        </p>
-        <p className="mt-3 text-sm leading-6 text-[#D8D8D2]">
-          Starting prices give a realistic entry point. Final investment depends on scope, timeline, integrations, content, and functionality. Larger or specialized builds are quoted custom.
-        </p>
-      </div>
-
-      <div className="mt-16 border-t border-white/10 pt-10">
+      <div className="border-t border-white/10 pt-10">
         <PricingGroup
-          eyebrow="Main Build Tiers"
-          title="Modern custom builds for serious presentation and scalable growth."
+          eyebrow="New Builds"
+          title="Websites and software designed for distinct stages of growth."
           items={mainBuildTiers}
           columns="three"
         />
 
         <PricingGroup
-          eyebrow="Redesign / Modernization"
-          title="Upgrade an existing site into a stronger long-term foundation."
+          eyebrow="Redesign & Migration"
+          title="A stronger system for an existing digital presence."
           items={modernizationServices}
           columns="two"
           isSecondary
@@ -469,16 +466,14 @@ function PricingSection() {
       <div className="mt-20 border-t border-[#E6B8A2]/20 pt-10">
         <PricingSubsectionIntro
           eyebrow="Ongoing Support"
-          title="Recurring support for managed infrastructure and growth."
-          copy="Care plans keep the site monitored, improved, and ready for new campaigns, content, and functionality after launch."
+          title="Care after launch, from maintenance to active development."
+          copy="Choose steady site care, ongoing optimization, or a closer development partnership."
         />
-        <PricingGroup
-          eyebrow="Care / Growth Plans"
-          title="Monthly partnership options for maintenance, optimization, and active iteration."
-          items={growthPlans}
-          columns="three"
-          isSecondary
-        />
+        <MotionStagger className="mt-8 grid gap-5 lg:grid-cols-3">
+          {growthPlans.map((item) => (
+            <PricingCard key={item.name} item={item} />
+          ))}
+        </MotionStagger>
       </div>
     </Section>
   );
@@ -557,16 +552,16 @@ function PricingCard({ item }: { item: PricingItem }) {
 
   return (
     <MotionCard className="interactive-card flex h-full flex-col rounded-lg border border-white/10 bg-[#101011] p-6 hover:bg-white/[0.045] sm:p-7">
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#A1A1AA]">
-        {item.bestFor ? "Best For" : "Good For"}
+      <h4 className="text-2xl font-semibold text-[#F5F5F2]">{item.name}</h4>
+      <p className="mt-3 text-3xl font-semibold text-[#E6B8A2]">
+        {item.startingAt}
       </p>
-      <p className="mt-3 text-sm leading-6 text-[#C9C9C3]">
-        {item.bestFor || item.goodFor}
-      </p>
-      <div className="mt-7 border-t border-white/10 pt-6">
-        <h4 className="text-2xl font-semibold text-[#F5F5F2]">{item.name}</h4>
-        <p className="mt-3 text-3xl font-semibold text-[#E6B8A2]">
-          {item.startingAt}
+      <div className="mt-6 border-t border-white/10 pt-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#A1A1AA]">
+          Best For
+        </p>
+        <p className="mt-3 text-sm leading-6 text-[#C9C9C3]">
+          {item.bestFor || item.goodFor}
         </p>
         <p className="mt-4 text-sm leading-6 text-[#BDBDB7]">
           {item.positioning}
@@ -574,9 +569,15 @@ function PricingCard({ item }: { item: PricingItem }) {
       </div>
       <ul className="mt-6 grid gap-2.5">
         {visibleFeatures.map((feature) => (
-          <li key={feature} className="flex gap-3 text-sm leading-6 text-[#D7D7D1]">
-            <span className="mt-2 h-px w-4 shrink-0 bg-[#E6B8A2]" />
-            <span>{feature}</span>
+          <li
+            key={feature}
+            className="flex items-center gap-3 text-sm leading-6 text-[#D7D7D1]"
+          >
+            <span
+              aria-hidden="true"
+              className="h-px w-4 shrink-0 bg-[#E6B8A2]"
+            />
+            <span className="min-w-0">{feature}</span>
           </li>
         ))}
       </ul>
@@ -590,8 +591,8 @@ function AboutSection() {
       id="about"
       className="section-soft-transition section-vertical-texture py-20 lg:py-32"
       eyebrow="About"
-      title="Founder-led work with product-level technical standards."
-      copy="Treydmark Tech is a high-quality web solution studio founded and led by Trey Bryant, combining software engineering, design judgment, and practical business strategy."
+      title="Founder-led work. Product-level standards."
+      copy="Treydmark Tech is a founder-led web and software studio combining engineering experience, design judgment, and practical business thinking."
     >
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="self-start rounded-lg border border-white/10 bg-[#101011] p-6">
@@ -611,18 +612,15 @@ function AboutSection() {
             I&apos;m Trey, the founder of Treydmark Tech.
           </h3>
           <p className="mt-5 max-w-2xl text-base leading-8 text-[#C9C9C3]">
-            My focus is building websites that feel polished, perform well,
-            and communicate clearly. Having a background in software engineering and
-            product development allows me to approach projects from both the
-            technical and visual side. Beyond design, I value usability,
-            performance, responsive layouts, SEO foundations, and the systems
-            underneath the site that support long-term growth.
-            <br /><br />
-            I’ve worked across enterprise and product-focused environments
-            building scalable systems, APIs, frontend applications, and
-            user-facing tools. That experience now carries into client work
-            focused on helping businesses, brands, and creatives present
-            themselves more clearly online.
+            I build websites and digital tools that communicate clearly, perform
+            reliably, and remain maintainable as the business evolves. My
+            background in software engineering and product development helps me
+            consider both the visible experience and the systems behind it.
+          </p>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-[#C9C9C3]">
+            I’ve worked across enterprise and product environments building APIs,
+            frontend applications, internal systems, and customer-facing products.
+            I bring that same technical discipline to every client project.
           </p>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             <div>
@@ -631,8 +629,14 @@ function AboutSection() {
               </h4>
               <ul className="mt-4 space-y-3">
                 {whatGoesIntoTheWork.map((item) => (
-                  <li key={item} className="group flex items-start gap-3 text-sm leading-6 text-[#BDBDB7]">
-                    <span className="mt-1.5 inline-flex size-5 shrink-0 items-center justify-center text-[#E6B8A2]" aria-hidden="true">
+                  <li
+                    key={item}
+                    className="group flex items-center gap-3 text-sm leading-6 text-[#BDBDB7]"
+                  >
+                    <span
+                      className="inline-flex size-5 shrink-0 items-center justify-center text-[#E6B8A2]"
+                      aria-hidden="true"
+                    >
                       <svg
                         viewBox="0 0 24 24"
                         className="size-5 drop-shadow-[0_0_8px_rgba(230,184,162,0.22)]"
@@ -654,7 +658,7 @@ function AboutSection() {
                         </g>
                       </svg>
                     </span>
-                    <span>{item}</span>
+                    <span className="min-w-0">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -709,12 +713,11 @@ function ContactSection() {
             Start a project
           </p>
           <h2 className="mt-4 text-[2.15rem] font-semibold leading-[1.06] text-[#F5F5F2] sm:text-5xl lg:leading-[1.02]">
-            Ready to modernize your online presence?
+            Let’s talk about what needs to change.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-[#C9C9C3]">
-            Tell me where your business is now and where you want your online
-            presence to go. The first conversation is about fit, scope, and the
-            clearest next move.
+            Share where the site stands, what is not working, and what the next
+            version needs to accomplish.
           </p>
         </MotionReveal>
         <ContactForm />

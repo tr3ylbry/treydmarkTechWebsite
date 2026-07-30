@@ -18,7 +18,7 @@ export const servicePreviews = [
   {
     title: "Business Websites",
     description:
-      "Professional websites designed to communicate clearly, perform well, and support long-term business growth.",
+      "Focused marketing sites that present the offer and guide visitors toward the next step.",
     features: [
       "Responsive Page Systems",
       "Conversion-Focused Structure",
@@ -28,7 +28,7 @@ export const servicePreviews = [
   {
     title: "Booking & Lead Capture",
     description:
-      "Inquiry flows, scheduling systems, contact funnels, and streamlined client communication.",
+      "Connected paths from initial interest to a booked conversation.",
     features: [
       "Multi-Step Inquiry Forms",
       "Scheduling Integrations",
@@ -38,7 +38,7 @@ export const servicePreviews = [
   {
     title: "E-Commerce & Memberships",
     description:
-      "Online stores, gated content, subscription systems, and account-based experiences.",
+      "Commerce and account experiences for products, memberships, and recurring access.",
     features: [
       "Product & Checkout Flows",
       "Membership Systems",
@@ -48,7 +48,7 @@ export const servicePreviews = [
   {
     title: "Brand & Visual Direction",
     description:
-      "Refined visual systems that improve clarity, trust, and overall digital presentation.",
+      "A cohesive visual and messaging system across the digital experience.",
     features: [
       "Messaging Refinement",
       "Visual Consistency",
@@ -58,7 +58,7 @@ export const servicePreviews = [
   {
     title: "SEO & Search Visibility",
     description:
-      "Technical foundations that help websites perform better and remain discoverable.",
+      "Search-ready implementation built into the site from the start.",
     features: [
       "Metadata & Indexing",
       "Analytics Readiness",
@@ -68,7 +68,7 @@ export const servicePreviews = [
   {
     title: "Platforms & Internal Tools",
     description:
-      "Connected systems, dashboards, and operational tools built around real workflows.",
+      "Purpose-built software for workflows that do not fit an off-the-shelf tool.",
     features: [
       "Admin Dashboards",
       "Database-Backed Systems",
@@ -96,7 +96,7 @@ export const portfolioProjects = [
     title: "Sell With Casey James",
     type: "Real Estate Website • Starter Site",
     summary:
-      "A polished real estate website structured around agent credibility, local market confidence, property guidance, and a clear path for prospective sellers to connect.",
+      "A polished real estate website structured around agent capability, local market confidence, property guidance, and a clear path for prospective sellers to connect.",
     tags: ["Real Estate", "Lead Capture", "Responsive Design"],
     tone: "Trust • Listings • Seller Leads",
     href: "https://sellwithcaseyjames.com/",
@@ -109,7 +109,7 @@ export const portfolioProjects = [
     title: "Jorge Pensky Tennis Academy",
     type: "Academy Website • Growth Website",
     summary:
-      "A focused tennis academy website built to present coaching programs, instructor credibility, training opportunities, and a direct path for students and parents to inquire.",
+      "A friendly tennis academy website built to present coaching programs, instructor credibility, training opportunities, and a direct inquiry path for students and parents.",
     tags: ["Sports Academy", "Program UX", "Inquiry Flow"],
     tone: "Coaching • Programs • Enrollment",
     href: "https://jorgepenskytennisacademy.com/",
@@ -125,25 +125,25 @@ export const processSteps = [
     step: "01",
     title: "Discover",
     description:
-      "Clarify goals, audience, messaging, and the overall experience the site should create.",
+      "Define the goals, audience, offer, and current constraints.",
   },
   {
     step: "02",
     title: "Design",
     description:
-      "Shape the visual direction, page structure, messaging flow, and inquiry experience before development begins.",
+      "Set the visual direction, page structure, and inquiry flow.",
   },
   {
     step: "03",
     title: "Build",
     description:
-      "Develop responsive, polished, search-friendly pages with clean structure and room for future growth.",
+      "Develop and test a responsive, search-ready site.",
   },
   {
     step: "04",
     title: "Launch & Support",
     description:
-      "Deploy the site, refine final details, and provide ongoing support as the business grows.",
+      "Deploy, refine, and maintain the site as needed.",
   },
 ];
 
@@ -152,9 +152,9 @@ export const mainBuildTiers = [
     name: "Starter Site",
     startingAt: "Starting at $2,000",
     bestFor:
-      "Local businesses, contractors, restaurants, solo professionals, artists and startups that need a polished web presence.",
+      "Local businesses, independent professionals, artists, restaurants, and early-stage teams.",
     positioning:
-      "A professionally designed custom website built for trust, presentation quality, responsive UX, and a stronger first impression.",
+      "A focused custom site built to establish trust and make the next step clear.",
     features: [
       "Custom Modern Responsive Design",
       "4-6 Core Pages",
@@ -168,9 +168,9 @@ export const mainBuildTiers = [
     name: "Growth Website",
     startingAt: "Starting at $5,000",
     bestFor:
-      "Growing businesses, marketing-driven brands, and teams that need stronger lead generation, premium UX, and deeper customization.",
+      "Established teams investing in lead generation, content, and a more tailored customer journey.",
     positioning:
-      "A strategic business asset built for credibility, customer conversion, search visibility, and long-term marketing momentum.",
+      "A deeper website system designed to support marketing, conversion, and continued expansion.",
     features: [
       "Everything From Starter",
       "Advanced Layouts & Interactions",
@@ -184,9 +184,9 @@ export const mainBuildTiers = [
     name: "Custom Platform / App",
     startingAt: "Custom Quote",
     bestFor:
-      "Custom business tools, dashboards, SaaS MVPs, member portals, booking systems, mobile apps, and internal operational software.",
+      "Dashboards, portals, SaaS products, booking systems, and internal tools.",
     positioning:
-      "Software consulting and product development for businesses that need scalable functionality beyond a standard marketing site.",
+      "Product development for software that goes beyond a marketing site.",
     features: [
       "Everything From Growth",
       "Custom Application Functionality",
@@ -203,9 +203,9 @@ export const modernizationServices = [
     name: "Minor Refresh",
     startingAt: "Starting at $1,000",
     goodFor:
-      "Smaller-scope improvements to visual polish, responsiveness, layouts, content, and images without a full rebuild.",
+      "Existing sites that need visual, content, or responsive improvements.",
     positioning:
-      "Targeted modernization for existing sites that need cleanup, not major platform migration or custom application work.",
+      "Targeted updates that improve the current site without a full rebuild.",
     features: [
       "Visual Modernization",
       "Responsiveness Improvements",
@@ -217,9 +217,9 @@ export const modernizationServices = [
     name: "Major Redesign / Migration",
     startingAt: "Starting at $3,000",
     goodFor:
-      "Complete visual overhauls, platform migrations, architecture restructuring, branding refreshes, and old business site rebuilds.",
+      "Outdated sites that need a full redesign, platform migration, or structural rebuild.",
     positioning:
-      "A modernization path for businesses ready to move away from outdated platforms and into scalable modern infrastructure.",
+      "A modernized system with clearer architecture and room to evolve.",
     features: [
       "Complete Visual Overhaul",
       "Modern Rebuild",
@@ -235,9 +235,9 @@ export const growthPlans = [
     name: "Essential Care Plan",
     startingAt: "Starting at $99/mo",
     bestFor:
-      "Businesses that want peace-of-mind management for a professionally maintained site.",
+      "Businesses that want the site monitored, maintained, and backed up.",
     positioning:
-      "Managed infrastructure and support so the site stays monitored, backed up, and cared for after launch.",
+      "Reliable care for hosting, security, and small post-launch updates.",
     features: [
       "Managed Hosting",
       "Uptime Monitoring",
@@ -251,9 +251,9 @@ export const growthPlans = [
     name: "Growth Plan",
     startingAt: "Starting at $299/mo",
     bestFor:
-      "Businesses actively investing in their online presence and ongoing digital improvement.",
+      "Businesses investing in regular SEO, content, analytics, and performance improvements.",
     positioning:
-      "Active growth support focused on analytics, SEO, content updates, and month-to-month optimization.",
+      "Ongoing optimization guided by site data and changing priorities.",
     features: [
       "Everything In Essential Care",
       "Analytics Reporting",
@@ -264,12 +264,12 @@ export const growthPlans = [
     ],
   },
   {
-    name: "Custom Growth Partnership",
+    name: "Development Partnership",
     startingAt: "Starting at $750/mo",
     bestFor:
-      "Serious businesses that need a digital partner for ongoing iteration and new functionality.",
+      "Teams that need recurring development, new features, and faster iteration.",
     positioning:
-      "A recurring partnership for strategy, feature additions, conversion improvements, and priority support.",
+      "A closer working relationship for ongoing product and website work.",
     features: [
       "Everything In Growth",
       "Ongoing Development",
@@ -290,10 +290,9 @@ export const reasons = [
 ];
 
 export const whatGoesIntoTheWork = [
-  "Responsive, conversion-focused page structure",
-  "Frontend development built for performance and scalability",
-  "Clear messaging and improved user experience",
-  "Brand consistency and visual direction",
-  "SEO-conscious structure and analytics",
-  "Long-term maintainability and growth planning",
+  "Conversion-focused page structure",
+  "Clear messaging and visual direction",
+  "Performance-first frontend development",
+  "SEO and analytics foundations",
+  "Scalable, maintainable architecture",
 ];

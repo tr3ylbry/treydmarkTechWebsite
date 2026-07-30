@@ -121,7 +121,7 @@ export function ContactForm() {
       setFieldErrors({});
       setResetToken((current) => current + 1);
       setSubmitSuccess(
-        "Inquiry sent. I will review the details and follow up via the phone number or email you provided."
+        "Inquiry received. I’ll review the details and follow up by email or phone."
       );
     } catch {
       setSubmitError(genericSubmitError);
@@ -206,7 +206,7 @@ export function ContactForm() {
             htmlFor="message"
             className="text-sm font-medium text-[#F5F5F2]"
           >
-            Project Goals / Message
+            Project Details
           </label>
           <textarea
             id="message"
@@ -214,7 +214,7 @@ export function ContactForm() {
             rows={6}
             required
             minLength={20}
-            placeholder="What needs to change, what is working now, and what would make the project successful?"
+            placeholder="What needs to change, and what should the project accomplish?"
             aria-invalid={Boolean(fieldErrors.message)}
             aria-describedby={fieldErrors.message ? "message-error" : undefined}
             data-invalid={fieldErrors.message ? "true" : undefined}
@@ -233,7 +233,7 @@ export function ContactForm() {
           disabled={isSubmitting}
           className="interactive-button w-full rounded-full bg-[#E6B8A2] px-6 py-4 text-sm font-semibold text-[#0B0B0C] hover:bg-[#F1C8B8] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
         >
-          {isSubmitting ? "Sending..." : "Start a Project"}
+          {isSubmitting ? "Sending..." : "Send Inquiry"}
         </button>
         <p
           aria-live="polite"
@@ -241,9 +241,7 @@ export function ContactForm() {
             submitError ? "text-[#F8AFAF]" : "text-[#C9C9C3]"
           }`}
         >
-          {submitError ||
-            submitSuccess ||
-            "Replies route through the email address you enter above."}
+          {submitError || submitSuccess || ""}
         </p>
       </div>
     </form>

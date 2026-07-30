@@ -9,8 +9,8 @@ export function Footer() {
             Treydmark Tech
           </p>
           <p className="mt-2 max-w-xl text-sm leading-6 text-[#A1A1AA]">
-            Modern websites, brand refinement, SEO foundations, and custom web
-            systems for small and medium-sized businesses.
+            Treydmark Tech is a founder-led web and software studio building
+            polished websites, digital tools, and long-term client partnerships.
           </p>
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-3 text-sm text-[#A1A1AA]">
