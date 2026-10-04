@@ -1,3 +1,4 @@
+import { LivePortfolioPreview } from "@/components/site/LivePortfolioPreview";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { ContactForm } from "@/components/site/ContactForm";
@@ -248,14 +249,7 @@ function PortfolioPreview() {
                     </div>
                   </div>
                   <MobilePortfolioFallback project={project} />
-                  <div className="browser-stage relative hidden h-[400px] overflow-hidden border-t border-white/[0.03] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] sm:block lg:h-[500px]">
-                    <iframe
-                      src={getProjectPreviewHref(project)}
-                      title={`${project.title} website preview`}
-                      className="h-full w-full border-0 bg-white"
-                      loading="lazy"
-                    />
-                  </div>
+                  <LivePortfolioPreview src={getProjectPreviewHref(project)} title={project.title} />
                   <div className="relative overflow-hidden rounded-b-[inherit] flex items-center justify-between gap-3 border-t border-white/10 bg-[#0F0F10] px-4 py-3">
                     <p className="text-xs leading-5 text-[#8F8F89]">
                       Preview unavailable? View the live site.
