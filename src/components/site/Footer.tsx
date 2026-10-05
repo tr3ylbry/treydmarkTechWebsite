@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { navItems } from "@/lib/site-content";
 
 export function Footer() {
@@ -15,9 +16,9 @@ export function Footer() {
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-3 text-sm text-[#A1A1AA]">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="hover:text-[#F5F5F2]">
+            <Link key={item.href} href={item.href} className="hover:text-[#F5F5F2]">
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

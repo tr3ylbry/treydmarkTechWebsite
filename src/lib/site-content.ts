@@ -1,10 +1,10 @@
 export const navItems = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "/projects" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#process" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export const trustPoints = [
@@ -118,7 +118,48 @@ export const portfolioProjects = [
     mobilePreviewImage: "/portfolio/jorge-pensky-tennis-academy-mobile-preview.jpg",
     featured: false,
   },
+  {
+    title: "The Brassanovas",
+    type: "Live Music Website • Band Platform",
+    summary:
+      "A bold, performance-led site that brings the band's sound, upcoming shows, repertoire, and booking inquiry path together in one place.",
+    tags: ["Live Events", "Shows & Repertoire", "Booking Flow"],
+    tone: "Music • Energy • Events",
+    href: "https://thebrassanovas.com/",
+    liveUrl: "https://thebrassanovas.com/",
+    iframeUrl: "https://thebrassanovas.com/",
+    mobilePreviewImage: "/portfolio/the-brassanovas-mobile-preview.jpg",
+    featured: true,
+  },
+  {
+    title: "Heart of the Matter School of Music",
+    type: "Music Education Website • Booking Experience",
+    summary:
+      "A welcoming home for music lessons that connects program information, pricing, and a clear path to book a free trial.",
+    tags: ["Music Education", "Lesson Discovery", "Booking"],
+    tone: "Learning • Expression • Connection",
+    href: "https://www.heartofthematterschoolofmusic.com/",
+    liveUrl: "https://www.heartofthematterschoolofmusic.com/",
+    iframeUrl: "https://www.heartofthematterschoolofmusic.com/",
+    mobilePreviewImage: "/portfolio/heart-of-the-matter-mobile-preview.jpg",
+    featured: false,
+  },
+  {
+    title: "Hondo’s Handyman",
+    type: "Home Services Website • Local Business",
+    summary:
+      "An approachable local service site that presents Matt's repair work and gives homeowners direct ways to call or request an estimate.",
+    tags: ["Home Services", "Project Gallery", "Estimate Requests"],
+    tone: "Local • Practical • Trustworthy",
+    href: "https://www.hondoshandyman.com/",
+    liveUrl: "https://www.hondoshandyman.com/",
+    iframeUrl: "https://www.hondoshandyman.com/",
+    mobilePreviewImage: "/portfolio/hondos-handyman-mobile-preview.jpg",
+    featured: false,
+  },
 ];
+
+export type PortfolioProject = (typeof portfolioProjects)[number];
 
 export const processSteps = [
   {
