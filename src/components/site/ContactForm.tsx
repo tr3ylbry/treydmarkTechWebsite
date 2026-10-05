@@ -11,53 +11,20 @@ import {
   useState,
 } from "react";
 
-type InquiryField =
-  | "name"
-  | "email"
-  | "phone"
-  | "business"
-  | "website"
-  | "service"
-  | "budget"
-  | "timeline"
-  | "message";
-
-type FieldErrors = Partial<Record<InquiryField, string>>;
-
-const serviceOptions = [
-  "Starter Site",
-  "Growth Website",
-  "Custom Platform / App",
-  "Minor Refresh",
-  "Major Redesign / Migration",
-  "Ongoing Support",
-  "Other",
-];
-
-const budgetOptions = [
-  "$1,000 - $3,000",
-  "$3,000 - $5,000",
-  "$5,000 - $15,000",
-  "$15,000+",
-  "Not sure yet",
-];
-
-const timelineOptions = [
-  "As soon as possible",
-  "Within 1 month",
-  "1 - 3 months",
-  "Flexible",
-];
+import { budgetOptions, inquiryLimits, isMailbox, serviceOptions, timelineOptions, validateInquiry, type InquiryField, type FieldErrors } from "@/lib/inquiry-schema";
 
 const inputClassName =
   "interactive-field mt-2 h-12 w-full rounded-md border border-white/10 bg-[#0B0B0C] px-4 text-sm text-[#F5F5F2] outline-none placeholder:text-[#73737A]";
 
 const websitePrefix = "https://";
+const fallbackEmail = process.env.NEXT_PUBLIC_CONTACT_FALLBACK_EMAIL?.trim();
 const genericSubmitError =
   "The inquiry could not be sent. Please try again in a few minutes.";
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitting = useRef(false);
+  const statusRef = useRef<HTMLParagraphElement>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -83,6 +50,7 @@ export function ContactForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting.current) return;
 
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -97,9 +65,13 @@ export function ContactForm() {
     setFieldErrors(nextFieldErrors);
 
     if (Object.keys(nextFieldErrors).length > 0) {
+      const first = Object.keys(nextFieldErrors)[0];
+      const id = first === "website" ? "website-display" : ["service", "budget", "timeline"].includes(first) ? `${first}-trigger` : first;
+      form.querySelector<HTMLElement>(`[id="${id}"]`)?.focus();
       return;
     }
 
+    submitting.current = true;
     setIsSubmitting(true);
 
     try {
@@ -116,17 +88,23 @@ export function ContactForm() {
         return;
       }
 
+      const result: unknown = await response.json();
+      if (!result || typeof result !== "object" || !("success" in result) || result.success !== true || !("code" in result) || result.code !== "accepted") {
+        throw new Error("Unconfirmed submission");
+      }
       form.reset();
       setWebsiteValue("");
       setFieldErrors({});
       setResetToken((current) => current + 1);
       setSubmitSuccess(
-        "Inquiry received. I’ll review the details and follow up by email or phone."
+        "Inquiry accepted for sending. I’ll review the details and follow up by email or phone."
       );
     } catch {
-      setSubmitError(genericSubmitError);
+      setSubmitError("We could not confirm your inquiry was accepted. Please contact Treydmark directly before retrying.");
     } finally {
+      submitting.current = false;
       setIsSubmitting(false);
+      statusRef.current?.focus();
     }
   }
 
@@ -134,8 +112,13 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
+      aria-busy={isSubmitting}
       className="rounded-lg border border-white/10 bg-[#101011] p-5 shadow-[var(--surface-shadow)] sm:p-7"
     >
+      <div hidden aria-hidden="true">
+        <label htmlFor="company-website">Leave this field empty</label>
+        <input id="company-website" name="companyWebsite" type="text" tabIndex={-1} autoComplete="off" maxLength={inquiryLimits.companyWebsite} />
+      </div>
       <div className="grid gap-6 md:grid-cols-2 md:gap-5">
         <Field
           label="Name"
@@ -214,6 +197,7 @@ export function ContactForm() {
             rows={6}
             required
             minLength={20}
+            maxLength={inquiryLimits.message}
             placeholder="What needs to change, and what should the project accomplish?"
             aria-invalid={Boolean(fieldErrors.message)}
             aria-describedby={fieldErrors.message ? "message-error" : undefined}
@@ -236,6 +220,9 @@ export function ContactForm() {
           {isSubmitting ? "Sending..." : "Send Inquiry"}
         </button>
         <p
+          ref={statusRef}
+          tabIndex={-1}
+          role={submitError ? "alert" : "status"}
           aria-live="polite"
           className={`text-sm ${
             submitError ? "text-[#F8AFAF]" : "text-[#C9C9C3]"
@@ -244,6 +231,11 @@ export function ContactForm() {
           {submitError || submitSuccess || ""}
         </p>
       </div>
+      {fallbackEmail && isMailbox(fallbackEmail) ? (
+        <a href={`mailto:${fallbackEmail}`} className="mt-4 inline-block text-sm text-[#E6B8A2] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#E6B8A2]">
+          Email Treydmark directly
+        </a>
+      ) : null}
     </form>
   );
 }
@@ -304,6 +296,8 @@ function validateInquiryForm(values: Record<InquiryField, string>) {
     }
   }
 
+  const serverPolicy = validateInquiry(values);
+  if (!serverPolicy.valid) Object.assign(errors, serverPolicy.fieldErrors);
   return errors;
 }
 
@@ -362,6 +356,7 @@ function Field({
         name={name}
         type={type}
         required={required}
+        maxLength={inquiryLimits[name]}
         placeholder={placeholder}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
@@ -404,6 +399,7 @@ function WebsiteField({
           id="website-display"
           type="text"
           inputMode="url"
+          maxLength={inquiryLimits.website - websitePrefix.length}
           autoCapitalize="none"
           autoCorrect="off"
           spellCheck={false}
