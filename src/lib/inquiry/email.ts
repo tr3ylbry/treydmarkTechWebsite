@@ -77,4 +77,3 @@ export function getInquiryEmailText(payload: InquiryPayload) {
     payload.message,
   ].join("\n");
 }
-
