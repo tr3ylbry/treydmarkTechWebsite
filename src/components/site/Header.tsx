@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 import { navItems } from "@/lib/site-content";
 
@@ -13,7 +14,7 @@ export function Header() {
         aria-label="Primary navigation"
         className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10"
       >
-        <a href="#top" className="group flex items-center gap-3">
+        <Link href="/" className="group flex items-center gap-3">
           <span className="grid size-10 place-items-center rounded-lg border border-[#E6B8A2]/35 bg-[#E6B8A2]/10 text-sm font-semibold text-[#F5F5F2] shadow-[0_0_32px_rgba(230,184,162,0.14)]">
             TT
           </span>
@@ -25,26 +26,26 @@ export function Header() {
               DESIGN • DEVELOPMENT • STRATEGY
             </span>
           </span>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-7 lg:flex">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="text-sm text-[#A1A1AA] transition hover:text-[#F5F5F2]"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
 
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="interactive-button hidden rounded-full bg-[#E6B8A2] px-5 py-3 text-sm font-semibold text-[#0B0B0C] shadow-[0_0_28px_rgba(230,184,162,0.16)] hover:bg-[#F1C8B8] lg:inline-flex"
         >
           Start a Project
-        </a>
+        </Link>
 
         <div className="relative lg:hidden">
           <button
@@ -76,22 +77,22 @@ export function Header() {
               className="absolute right-0 mt-4 w-64 rounded-lg border border-white/10 bg-[#111113] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.055)]"
             >
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block rounded-md px-3 py-3 text-sm text-[#D9D9D6] transition hover:bg-white/[0.04] hover:text-[#F5F5F2]"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
-              <a
-                href="#contact"
+              <Link
+                href="/#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="interactive-button mt-2 flex items-center justify-center rounded-md bg-[#E6B8A2] px-4 py-3 text-sm font-semibold text-[#0B0B0C] hover:bg-[#F1C8B8]"
               >
                 Start a Project
-              </a>
+              </Link>
             </div>
           ) : null}
         </div>
