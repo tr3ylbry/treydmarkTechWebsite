@@ -82,6 +82,7 @@ export function LivePortfolioPreview({ src, title }: { src: string; title: strin
           src={src}
           title={`${title} website preview`}
           loading="lazy"
+          sandbox="allow-scripts allow-forms allow-same-origin"
           inert={!active}
           tabIndex={active ? 0 : -1}
           aria-describedby={`${id}-help`}
