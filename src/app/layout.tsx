@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Treydmark Tech | Modern Websites, Branding & SEO",
   description:
     "Treydmark Tech helps small and medium-sized businesses build sharper websites, a stronger brand, and a clean digital foundation that will turn visitors into customers.",
-  metadataBase: new URL("https://treydmarktech.com"),
+  metadataBase: new URL("https://www.treydmarktech.com"),
   openGraph: {
     title: "Treydmark Tech | Modern Websites, Branding & SEO",
     description:

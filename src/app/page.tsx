@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { ContactForm } from "@/components/site/ContactForm";
@@ -19,6 +20,11 @@ import {
   servicePreviews,
   whatGoesIntoTheWork,
 } from "@/lib/site-content";
+
+// Keep the homepage canonical page-scoped so child routes cannot inherit it.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (
