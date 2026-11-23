@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 
 import { navItems } from "@/lib/site-content";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuToggle = useRef<HTMLButtonElement>(null);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0B0B0C]/88 shadow-[0_1px_0_rgba(255,255,255,0.025),0_14px_42px_rgba(0,0,0,0.24)] backdrop-blur-xl">
@@ -47,8 +48,18 @@ export function Header() {
           Start a Project
         </Link>
 
-        <div className="relative lg:hidden">
+        <div
+          className="relative lg:hidden"
+          onKeyDown={(event) => {
+            if (event.key === "Escape" && isMobileMenuOpen) {
+              event.preventDefault();
+              setIsMobileMenuOpen(false);
+              mobileMenuToggle.current?.focus({ preventScroll: true });
+            }
+          }}
+        >
           <button
+            ref={mobileMenuToggle}
             type="button"
             aria-controls="mobile-navigation-menu"
             aria-expanded={isMobileMenuOpen}
@@ -74,7 +85,12 @@ export function Header() {
           {isMobileMenuOpen ? (
             <div
               id="mobile-navigation-menu"
-              className="absolute right-0 mt-4 w-64 rounded-lg border border-white/10 bg-[#111113] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.055)]"
+              onFocus={(event) => {
+                if (event.target instanceof HTMLAnchorElement) {
+                  event.target.scrollIntoView({ block: "nearest" });
+                }
+              }}
+              className="absolute right-0 mt-4 max-h-[calc(100dvh-6rem)] w-64 scroll-py-3 overflow-y-auto overscroll-contain rounded-lg border border-white/10 bg-[#111113] p-3 shadow-[0_18px_50px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.055)]"
             >
               {navItems.map((item) => (
                 <Link
