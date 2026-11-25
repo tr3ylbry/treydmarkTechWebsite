@@ -506,6 +506,20 @@ function CustomSelectField({
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const frame = window.requestAnimationFrame(() => {
+      listboxRef.current?.children[highlightedIndex]?.scrollIntoView({ block: "nearest" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [isOpen, highlightedIndex]);
+
+  function openListbox(fromEnd = false) {
+    const selectedIndex = options.indexOf(selectedValue);
+    setHighlightedIndex(selectedIndex >= 0 ? selectedIndex : fromEnd ? options.length - 1 : 0);
+    setIsOpen(true);
+  }
+
   function commitSelection(option: string) {
     setSelectedValue(option);
     setHighlightedIndex(options.indexOf(option));
@@ -516,48 +530,39 @@ function CustomSelectField({
   function handleButtonKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
-      setIsOpen(true);
-      setHighlightedIndex((current) => {
-        if (selectedValue) {
-          return options.indexOf(selectedValue);
-        }
-        return current;
-      });
+      if (!isOpen) {
+        openListbox(event.key === "ArrowUp");
+      } else {
+        const direction = event.key === "ArrowDown" ? 1 : -1;
+        setHighlightedIndex((current) => Math.max(0, Math.min(current + direction, options.length - 1)));
+      }
       return;
     }
 
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      setIsOpen((current) => !current);
+      if (isOpen) {
+        commitSelection(options[highlightedIndex]);
+      } else {
+        openListbox();
+      }
       return;
     }
 
     if (event.key === "Escape") {
-      setIsOpen(false);
-    }
-  }
-
-  function handleListboxKeyDown(event: KeyboardEvent<HTMLUListElement>) {
-    if (event.key === "Escape" || event.key === "Tab") {
+      event.preventDefault();
       setIsOpen(false);
       return;
     }
 
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      setHighlightedIndex((current) => Math.min(current + 1, options.length - 1));
+    if (event.key === "Tab") {
+      setIsOpen(false);
       return;
     }
 
-    if (event.key === "ArrowUp") {
+    if (isOpen && (event.key === "Home" || event.key === "End")) {
       event.preventDefault();
-      setHighlightedIndex((current) => Math.max(current - 1, 0));
-      return;
-    }
-
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      commitSelection(options[highlightedIndex]);
+      setHighlightedIndex(event.key === "Home" ? 0 : options.length - 1);
     }
   }
 
@@ -574,9 +579,10 @@ function CustomSelectField({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls={listboxId}
+        aria-activedescendant={isOpen ? `${listboxId}-${highlightedIndex}` : undefined}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : undefined}
-        onClick={() => setIsOpen((current) => !current)}
+        onClick={() => isOpen ? setIsOpen(false) : openListbox()}
         onKeyDown={handleButtonKeyDown}
         data-invalid={error ? "true" : undefined}
         className={`${inputClassName} relative flex items-center justify-between text-left ${
@@ -616,7 +622,6 @@ function CustomSelectField({
           role="listbox"
           tabIndex={-1}
           aria-labelledby={`${name}-trigger`}
-          onKeyDown={handleListboxKeyDown}
           ref={listboxRef}
           style={listboxStyle}
           className={`custom-dropdown-scroll fixed z-[70] overflow-y-auto overscroll-contain rounded-md border border-white/10 bg-[#111113] p-1 shadow-[0_20px_52px_rgba(0,0,0,0.42),0_0_24px_rgba(230,184,162,0.07)] ${
