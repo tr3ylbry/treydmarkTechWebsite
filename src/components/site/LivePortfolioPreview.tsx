@@ -76,7 +76,7 @@ export function LivePortfolioPreview({ src, title }: { src: string; title: strin
           </button>
         ) : null}
       </div>
-      <div className="browser-stage relative h-[400px] overflow-hidden border-t border-white/[0.03] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] before:pointer-events-none before:absolute before:inset-0 before:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_22px_30px_rgba(0,0,0,0.18),inset_0_-22px_28px_rgba(0,0,0,0.12)] lg:h-[500px]">
+      <div className="browser-stage relative h-[400px] overflow-hidden border-t border-white/[0.03] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.02),inset_0_18px_30px_rgba(0,0,0,0.14)] lg:h-[500px]">
         <iframe
           id={id}
           src={src}
@@ -86,7 +86,7 @@ export function LivePortfolioPreview({ src, title }: { src: string; title: strin
           inert={!active}
           tabIndex={active ? 0 : -1}
           aria-describedby={`${id}-help`}
-          className={`h-full w-full border-0 bg-white ${active ? "" : "pointer-events-none"}`}
+          className={`block h-full w-full border-0 bg-white ${active ? "" : "pointer-events-none"}`}
         />
         <div className={`absolute inset-0 flex items-center justify-center bg-black/20 ${active ? "hidden" : ""}`}>
           <button
